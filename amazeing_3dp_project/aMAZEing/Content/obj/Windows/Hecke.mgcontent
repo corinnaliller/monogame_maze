@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>G:/3_Semester/3DP/GIT_MAZE/maze/amazeing_3dp_project/aMAZEing/Content/Hecke.JPG</SourceFile>
-  <SourceTime>2019-02-20T13:03:07.2164608+01:00</SourceTime>
+  <SourceTime>2019-02-20T14:05:31.6654415+01:00</SourceTime>
   <DestFile>G:/3_Semester/3DP/GIT_MAZE/maze/amazeing_3dp_project/aMAZEing/Content/bin/Windows/Hecke.xnb</DestFile>
-  <DestTime>2019-02-20T13:03:31.6829581+01:00</DestTime>
+  <DestTime>2019-02-20T14:06:11.6857688+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
