@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>G:/3_Semester/3DP/3D_MAZE_PROJEKT/aMAZEing_new/amazeing/amazeing_3dp_project/aMAZEing/Content/Teapot_red.FBX</SourceFile>
+  <SourceFile>G:/3_Semester/3DP/GIT_MAZE/maze/amazeing_3dp_project/aMAZEing/Content/Teapot_red.FBX</SourceFile>
   <SourceTime>2019-02-20T09:56:42.0153425+01:00</SourceTime>
-  <DestFile>G:/3_Semester/3DP/3D_MAZE_PROJEKT/aMAZEing_new/amazeing/amazeing_3dp_project/aMAZEing/Content/bin/Windows/Teapot_red.xnb</DestFile>
-  <DestTime>2019-02-20T09:57:31.543386+01:00</DestTime>
+  <DestFile>G:/3_Semester/3DP/GIT_MAZE/maze/amazeing_3dp_project/aMAZEing/Content/bin/Windows/Teapot_red.xnb</DestFile>
+  <DestTime>2019-02-20T12:16:31.7177437+01:00</DestTime>
   <Importer>FbxImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>ModelProcessor</Processor>
