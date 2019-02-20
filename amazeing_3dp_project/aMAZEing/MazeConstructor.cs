@@ -118,6 +118,26 @@ namespace aMAZEing
         {
             WandOben(x, z);
         }
+        private void KurveUntenRechts(int x, int z)
+        {
+            WandLinks(x, z);
+            WandOben(x, z);
+        }
+        private void KurveUntenLinks(int x, int z)
+        {
+            WandRechts(x, z);
+            WandOben(x, z);
+        }
+        private void KurveObenRechts(int x, int z)
+        {
+            WandLinks(x, z);
+            WandUnten(x, z);
+        }
+        private void KurveObenLinks(int x, int z)
+        {
+            WandRechts(x, z);
+            WandUnten(x, z);
+        }
 
         private void WandRechts(int x, int z)
         {
