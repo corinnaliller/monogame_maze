@@ -1,1 +1,1 @@
-3DP Projekt Liller und Klein
+3DP Projekt Liller, Klein und Spahr
