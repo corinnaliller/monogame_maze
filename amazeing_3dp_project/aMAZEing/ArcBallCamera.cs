@@ -21,8 +21,11 @@ namespace aMAZEing
     }
     public class ArcBallCamera : StaticCamera
     {
+        private float distanceBehindTarget = 2f;
+        private float distanceAboveTarget = 2f;
         private float distance;
         private float rotationSpeed = 60;
+        private float speed;
         private Keys fastKey = Keys.LeftShift;
         private Keys leftKey = Keys.A;
         private Keys rightKey = Keys.D;
@@ -60,6 +63,9 @@ namespace aMAZEing
 
         #endregion
 
+        public ArcBallCamera(Game game, GameObject target) : this(game,target.Position - new Vector3(2,-2,2),target)
+        {
+        }
         public ArcBallCamera(Game game, Vector3 position) : base(game,position)
         {
             Target = Vector3.Zero;
@@ -69,13 +75,14 @@ namespace aMAZEing
             base(game, position)
         {
             this.target = target;
+            this.speed = ((Spieler)target).Speed;
             this.distance = (target.Position - position).Length();
         }
 
         public override void Update(GameTime gameTime)
         {
             Target = target.Position;
-            
+            //Position = target.Position - new Vector3(2, -2, 2);
 
             KeyboardState currentKeyBoardState = Keyboard.GetState();
 
@@ -134,6 +141,22 @@ namespace aMAZEing
             {
                 RotateAround(Position + (Forward * distance), Right, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
+            if (currentKeyBoardState.IsKeyDown(Keys.Down))
+            {
+                Position = Position + (Vector3.Forward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+            }
+            if (currentKeyBoardState.IsKeyDown(Keys.Up))
+            {
+                Position = Position + (Vector3.Backward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+            }
+            if (currentKeyBoardState.IsKeyDown(Keys.Left))
+            {
+                Position = Position + (Vector3.Right * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+            }
+            if (currentKeyBoardState.IsKeyDown(Keys.Right))
+            {
+                Position = Position + (Vector3.Left * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+            }
 
             base.Update(gameTime);
         }
@@ -142,7 +165,7 @@ namespace aMAZEing
 
         public override void LookAt(Vector3 target)
         {
-            //Distance = (target - Position).Length();
+            Distance = (target - Position).Length();
             base.LookAt(target);
         }
 
@@ -189,5 +212,6 @@ namespace aMAZEing
         }
 
         #endregion
+        
     }
 }

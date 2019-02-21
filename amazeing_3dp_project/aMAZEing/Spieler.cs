@@ -12,7 +12,7 @@ namespace aMAZEing
 {
     class Spieler : GameObject
     {
-        
+        private Vector3 ziel;
         private Model model;
         private float speed = 5;
         public float Speed
@@ -25,9 +25,10 @@ namespace aMAZEing
         }       
         
 
-        public Spieler(Game game, Model model) : base(game)
+        public Spieler(Game game, Model model, Vector2 ziel) : base(game)
         {
             this.model = model;
+            this.ziel = new Vector3(ziel.X * 5, 3, ziel.Y * 5);
             
         }
         public void LoadContent()
@@ -45,22 +46,24 @@ namespace aMAZEing
         {
             KeyboardState keys = Keyboard.GetState();
 
+
             if (keys.IsKeyDown(Keys.Down))
             {
-                Position = Position + (Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Vector3.Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
             if (keys.IsKeyDown(Keys.Up))
             {
-                Position = Position + (Backward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Vector3.Backward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
             if (keys.IsKeyDown(Keys.Left))
             {
-                Position = Position + (Right * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Vector3.Right * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
             if (keys.IsKeyDown(Keys.Right))
             {
-                Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Vector3.Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
+            Forward = Position - ziel;
         }
     }
 }

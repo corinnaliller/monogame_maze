@@ -76,14 +76,14 @@ namespace aMAZEing
             p = new Plane(this, gras, 100, 1);
             
 
-            teekanne = new Spieler(this, spieler);
+            teekanne = new Spieler(this, spieler, map.ZielFeld);
             teekanne.Position = new Vector3(2.5f, 2, 2.5f);
-            camera = new ArcBallCamera(this, new Vector3(2.5f, 2.5f, 0), teekanne);
+            camera = new ArcBallCamera(this,teekanne);
             //camera = new TrackingCamera(this);
             //camera.Position = new Vector3(0, 5, 2);
             //((TrackingCamera)camera).Track(teekanne);
             //((ArcBallCamera)camera).SetView(ViewMode.Front);
-            ((ArcBallCamera)camera).Target = teekanne.Position;
+            //((ArcBallCamera)camera).Target = teekanne.Position;
             // TODO: use this.Content to load your game content here
         }
 
