@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,11 +13,18 @@ namespace aMAZEing
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private Model spieler;
+        private Vector3 pos;
+        double speedx, speedz;
         private Plane p;
         private ICamera camera;
         private Grid g;
         private Spieler teekanne;
-        private MazeConstructor maze;
+        string text, modelRotationstr;
+        private float modelRotation = 0.0f;
+        private double modelRotationdeg;
+        private Matrix projectionMatrix;
+        private float aspectRatio;
+        
 
         public Game1()
         {
@@ -37,7 +45,9 @@ namespace aMAZEing
         {
             // TODO: Add your initialization logic here
             g = new Grid(this, 5, 10, Color.Gray, Color.Red, Color.Blue);
+            pos = Vector3.Zero;
             base.Initialize();
+           
         }
 
         /// <summary>
@@ -77,6 +87,24 @@ namespace aMAZEing
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
+            modelRotationstr = Convert.ToString(modelRotation);
+            speedx = (Math.Sin(modelRotation)) * 30;
+            speedz = (Math.Cos(modelRotation)) * 30;
+            float speedxdouble, speedzdouble;
+            speedxdouble = (float)speedx;
+            speedzdouble = (float)speedz;
+
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Up))
+            {
+                pos += Vector3.Forward * speedzdouble;
+                pos += Vector3.Left * speedxdouble;
+            }
+            if (keyboardState.IsKeyDown(Keys.Down))
+            {
+                pos += Vector3.Backward * speedzdouble;
+                pos += Vector3.Right * speedxdouble;
+            }
 
             base.Update(gameTime);
         }
@@ -88,6 +116,20 @@ namespace aMAZEing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            Matrix[] transforms = new Matrix[spieler.Bones.Count];
+            spieler.CopyAbsoluteBoneTransformsTo(transforms);
+
+            foreach(ModelMesh mesh in spieler.Meshes)
+            {
+                foreach(BasicEffect effect in mesh.Effects)
+                {
+                    effect.EnableDefaultLighting();
+                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(modelRotation) * Matrix.CreateTranslation(pos);
+                    effect.Projection = projectionMatrix;
+                }
+                mesh.Draw();
+            }
 
             // TODO: Add your drawing code here
             g.Draw(camera);

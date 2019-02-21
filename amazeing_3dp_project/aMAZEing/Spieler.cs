@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +12,40 @@ namespace aMAZEing
 {
     class Spieler : GameObject
     {
+        
         private Model model;
+        
+        
+        
 
         public Spieler(Game game, Model model) : base(game)
         {
             this.model = model;
+            
+        }
+        public void LoadContent()
+        {
+            
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
         {
             model.Draw(LocalToWorld, camera.View, camera.Projection);
         }
+
+        public override void Update(GameTime gameTime)
+        {
+           
+            
+
+            base.Update(gameTime);
+
+
+
+
+
+        }
+
+       
     }
 }
