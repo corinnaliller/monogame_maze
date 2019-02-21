@@ -40,19 +40,19 @@ namespace aMAZEing
         {
             KeyboardState keys = Keyboard.GetState();
 
-            if (keys.IsKeyDown(Keys.Up))
+            if (keys.IsKeyDown(Keys.Down))
             {
                 Position = Position + (Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
-            if (keys.IsKeyDown(Keys.Down))
+            if (keys.IsKeyDown(Keys.Up))
             {
                 Position = Position + (Backward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
-            if (keys.IsKeyDown(Keys.Right))
+            if (keys.IsKeyDown(Keys.Left))
             {
                 Position = Position + (Right * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
-            if (keys.IsKeyDown(Keys.Left))
+            if (keys.IsKeyDown(Keys.Right))
             {
                 Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
