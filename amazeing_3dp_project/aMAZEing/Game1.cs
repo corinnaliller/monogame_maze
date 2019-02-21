@@ -24,6 +24,7 @@ namespace aMAZEing
         private double modelRotationdeg;
         private Matrix projectionMatrix;
         private float aspectRatio;
+        private MazeConstructor maze;
         
 
         public Game1()

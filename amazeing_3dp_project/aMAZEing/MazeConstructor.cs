@@ -212,12 +212,6 @@ namespace aMAZEing
             wandEffect.TextureEnabled = true;
             wandEffect.Texture = hecke;
             wandEffect.CurrentTechnique.Passes[0].Apply();
-            bodenEffect.Projection = camera.Projection;
-            bodenEffect.View = camera.View;
-            bodenEffect.World = Matrix.Identity;
-            bodenEffect.TextureEnabled = true;
-            bodenEffect.Texture = gras;
-            bodenEffect.CurrentTechnique.Passes[0].Apply();
             game.GraphicsDevice.SetVertexBuffer(vertexBufferWaende);
             game.GraphicsDevice.Indices = indexBufferWaende;
 

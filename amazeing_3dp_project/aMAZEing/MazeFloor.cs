@@ -12,7 +12,6 @@ namespace aMAZEing
     {
         private List<VertexPositionTexture> vertexListBoden;
         private List<short> indexListBoden;
-        private int height;
         private int step;
         private BasicEffect  bodenEffect;
         private Texture2D gras;
@@ -34,6 +33,16 @@ namespace aMAZEing
             {
                 return indexListBoden.ToArray();
             }
+        }
+        public MazeFloor(Game game, Texture2D texture, int height, int step)
+        {
+            vertexListBoden = new List<VertexPositionTexture>();
+            indexListboden = new List<short>();
+            this.game = game;
+            this.step = step;
+            this.gras = texture;
+            bodenEffect = new BasicEffect(game.GraphicsDevice);
+            CreateMaze();
         }
 
         private void CreateFloor()
@@ -57,6 +66,19 @@ namespace aMAZEing
             indexListBoden.Add(Convert.ToInt16(oldIndex));
             indexListBoden.Add(Convert.ToInt16(oldIndex + 2));
             indexListBoden.Add(Convert.ToInt16(oldIndex + 3));
+        }
+        public void Draw(ICamera camera)
+        {
+            bodenEffect.Projection = camera.Projection;
+            bodenEffect.View = camera.View;
+            bodenEffect.World = Matrix.Identity;
+            bodenEffect.TextureEnabled = true;
+            bodenEffect.Texture = gras;
+            bodenEffect.CurrentTechnique.Passes[0].Apply();
+            game.GraphicsDevice.SetVertexBuffer(vertexBufferBoden);
+            game.GraphicsDevice.Indices = indexBufferBoden;
+
+            game.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, IndicesBoden.Length / 3);
         }
     }
 }
