@@ -10,7 +10,7 @@ namespace aMAZEing
 {
     public enum MazePart
     {
-        GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks
+        GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks, Kreuzung
     }
     public class MazeConstructor
     {
@@ -52,7 +52,12 @@ namespace aMAZEing
         }
         private void CreateMaze()
         {
+            WandLinks(-1, 0);
+            WandLinks(-1, 1);
+            WandLinks(-1, 2);
             GangObenUnten(0, 0);
+            GangObenUnten(0, 1);
+            SackgasseOben(0, 2);
             //WandLinks(0, 0);
             //WandRechts(0, 0);
             //WandOben(0, 0);
@@ -68,14 +73,79 @@ namespace aMAZEing
             WandLinks(x, z);
             WandRechts(x, z);
         }
+        private void GangRechtsLinks(int x, int z)
+        {
+            WandOben(x, z);
+            WandUnten(x, z);
+        }
+        private void SackgasseOben(int x, int z)
+        {
+            WandOben(x, z);
+            WandRechts(x, z);
+            WandLinks(x, z);
+        }
+        private void SackgasseUnten(int x, int z)
+        {
+            WandUnten(x, z);
+            WandRechts(x, z);
+            WandLinks(x, z);
+        }
+        private void SackgasseRechts(int x, int z)
+        {
+            WandOben(x, z);
+            WandUnten(x, z);
+            WandRechts(x, z);
+        }
+        private void SackgasseLinks(int x, int z)
+        {
+            WandOben(x, z);
+            WandUnten(x, z);
+            WandLinks(x, z);
+        }
+        private void TKreuzungRechts(int x, int z)
+        {
+            WandLinks(x, z);
+        }
+        private void TKreuzungLinks(int x, int z)
+        {
+            WandRechts(x, z);
+        }
+        private void TKreuzungOben(int x, int z)
+        {
+            WandUnten(x, z);
+        }
+        private void TKreuzungUnten(int x, int z)
+        {
+            WandOben(x, z);
+        }
+        private void KurveUntenRechts(int x, int z)
+        {
+            WandLinks(x, z);
+            WandOben(x, z);
+        }
+        private void KurveUntenLinks(int x, int z)
+        {
+            WandRechts(x, z);
+            WandOben(x, z);
+        }
+        private void KurveObenRechts(int x, int z)
+        {
+            WandLinks(x, z);
+            WandUnten(x, z);
+        }
+        private void KurveObenLinks(int x, int z)
+        {
+            WandRechts(x, z);
+            WandUnten(x, z);
+        }
 
-        private void WandLinks(int x, int z)
+        private void WandRechts(int x, int z)
         {
             int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, 0, z), new Vector2(0,0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, height, z), new Vector2(0,1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, 0, z + step), new Vector2(1,0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, height, z + step), new Vector2(1,1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step), new Vector2(0,0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step), new Vector2(0,1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step + step), new Vector2(1,0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step + step), new Vector2(1,1)));
 
             indexList.Add(Convert.ToInt16(oldIndex));
             indexList.Add(Convert.ToInt16(oldIndex + 3));
@@ -84,13 +154,13 @@ namespace aMAZEing
             indexList.Add(Convert.ToInt16(oldIndex + 2));
             indexList.Add(Convert.ToInt16(oldIndex + 3));
         }
-        private void WandRechts(int x, int z)
+        private void WandLinks(int x, int z)
         {
             int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x+step, 0, z), new Vector2(0, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x+step, height, z), new Vector2(0, 1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x+step, 0, z + step), new Vector2(1, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x+step, height, z + step), new Vector2(1, 1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(0, 0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(0, 1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
             indexList.Add(Convert.ToInt16(oldIndex));
             indexList.Add(Convert.ToInt16(oldIndex + 1));
@@ -102,10 +172,10 @@ namespace aMAZEing
         private void WandOben(int x, int z)
         {
             int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, 0, z+step), new Vector2(0, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, height, z+step), new Vector2(0, 1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x + step, 0, z + step), new Vector2(1, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x + step, height, z + step), new Vector2(1, 1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step + step), new Vector2(0, 0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step + step), new Vector2(0, 1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
             indexList.Add(Convert.ToInt16(oldIndex));
             indexList.Add(Convert.ToInt16(oldIndex + 3));
@@ -117,10 +187,10 @@ namespace aMAZEing
         private void WandUnten(int x, int z)
         {
             int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, 0, z), new Vector2(0, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x, height, z), new Vector2(0, 1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x + step, 0, z), new Vector2(1, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x + step, height, z), new Vector2(1, 1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step), new Vector2(0, 0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step), new Vector2(0, 1)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 0)));
+            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(1, 1)));
 
             indexList.Add(Convert.ToInt16(oldIndex));
             indexList.Add(Convert.ToInt16(oldIndex + 1));
@@ -136,13 +206,11 @@ namespace aMAZEing
             effect.World = Matrix.Identity;
             effect.TextureEnabled = true;
             effect.Texture = texture;
-            //effect.EnableDefaultLighting();
 
             effect.CurrentTechnique.Passes[0].Apply();
             game.GraphicsDevice.SetVertexBuffer(vertexBuffer);
             game.GraphicsDevice.Indices = indexBuffer;
 
-            //game.GraphicsDevice.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
             game.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, Indices.Length / 3);
         }
     }
