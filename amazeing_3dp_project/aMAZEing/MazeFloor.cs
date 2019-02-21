@@ -12,7 +12,7 @@ namespace aMAZEing
     {
         private List<VertexPositionTexture> vertexListBoden;
         private List<short> indexListBoden;
-        private int step;
+        private int step, width, length;
         private BasicEffect  bodenEffect;
         private Texture2D gras;
         private IndexBuffer indexBufferBoden;
@@ -34,19 +34,29 @@ namespace aMAZEing
                 return indexListBoden.ToArray();
             }
         }
-        public MazeFloor(Game game, Texture2D texture, int height, int step)
+        public MazeFloor(Game game, Texture2D texture, int step, int width, int length)
         {
             vertexListBoden = new List<VertexPositionTexture>();
-            indexListboden = new List<short>();
+            indexListBoden = new List<short>();
             this.game = game;
             this.step = step;
+            this.width = width;
+            this.length = length;
             this.gras = texture;
             bodenEffect = new BasicEffect(game.GraphicsDevice);
-            CreateMaze();
+            CreateFloor();
         }
 
         private void CreateFloor()
         {
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    Boden(i, j);
+                }
+            }
+
             vertexBufferBoden = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionTexture), VerticesBoden.Length, BufferUsage.WriteOnly);
             vertexBufferBoden.SetData<VertexPositionTexture>(VerticesBoden);
             indexBufferBoden = new IndexBuffer(game.GraphicsDevice, typeof(short), IndicesBoden.Length, BufferUsage.WriteOnly);
@@ -56,16 +66,16 @@ namespace aMAZEing
         {
             int oldIndex = vertexListBoden.Count;
             vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step), new Vector2(0, 0)));
-            vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step + step), new Vector2(0, 1)));
+            vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step+step), new Vector2(0, 1)));
             vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
             vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 1)));
 
             indexListBoden.Add(Convert.ToInt16(oldIndex));
-            indexListBoden.Add(Convert.ToInt16(oldIndex + 3));
+            indexListBoden.Add(Convert.ToInt16(oldIndex + 2));
             indexListBoden.Add(Convert.ToInt16(oldIndex + 1));
             indexListBoden.Add(Convert.ToInt16(oldIndex));
-            indexListBoden.Add(Convert.ToInt16(oldIndex + 2));
             indexListBoden.Add(Convert.ToInt16(oldIndex + 3));
+            indexListBoden.Add(Convert.ToInt16(oldIndex + 2));
         }
         public void Draw(ICamera camera)
         {

@@ -23,6 +23,7 @@ namespace aMAZEing
         private IndexBuffer indexBufferWaende;
         private VertexBuffer vertexBufferWaende;
         private Game game;
+        private Mazemap map;
 
         public VertexPositionTexture[] VerticesWaende
         {
@@ -41,7 +42,7 @@ namespace aMAZEing
         }
         
 
-        public MazeConstructor(Game game,Texture2D textureWand, int height, int step)
+        public MazeConstructor(Game game,Texture2D textureWand,Mazemap map, int height, int step)
         {
             vertexListWaende = new List<VertexPositionTexture>();
             indexListWaende = new List<short>();
@@ -50,16 +51,46 @@ namespace aMAZEing
             this.step = step;
             this.hecke = textureWand;
             wandEffect = new BasicEffect(game.GraphicsDevice);
-            CreateMaze();
+            this.map = map;
+            CreateMaze(map);
         }
-        private void CreateMaze()
+        private void CreateMaze(Mazemap map)
         {
-            WandLinks(-1, 0);
-            WandLinks(-1, 1);
-            WandLinks(-1, 2);
-            GangObenUnten(0, 0);
-            GangObenUnten(0, 1);
-            SackgasseOben(0, 2);
+            for (int i = 0; i < map.Part.Length; i++)
+            {
+                WandLinks(-1, i);
+                WandLinks(-1, i);
+                WandLinks(-1, i);
+            }
+            for (int i = 0; i < map.Part.Length; i++)
+            {
+                for(int j = 0; j < map.Part.Length-1; j++)
+                {
+                    switch(map.Part[i][j])
+                    {
+                        case MazePart.GangObenUnten: GangObenUnten(i, j);break;
+                        case MazePart.GangRechtsLinks: GangRechtsLinks(i, j);break;
+                        case MazePart.Kreuzung:break;
+                        case MazePart.KurveObenLinks: KurveObenLinks(i, j);break;
+                        case MazePart.KurveObenRechts: KurveObenRechts(i, j);break;
+                        case MazePart.KurveUntenLinks: KurveUntenLinks(i, j);break;
+                        case MazePart.KurveUntenRechts: KurveUntenRechts(i, j);break;
+                        case MazePart.SackgasseLinks: SackgasseLinks(i, j);break;
+                        case MazePart.SackgasseOben: SackgasseOben(i, j);break;
+                        case MazePart.SackgasseRechts: SackgasseRechts(i, j);break;
+                        case MazePart.SackgasseUnten: SackgasseUnten(i, j);break;
+                        case MazePart.TKreuzungLinks: TKreuzungLinks(i, j);break;
+                        case MazePart.TKreuzungOben: TKreuzungOben(i, j);break;
+                        case MazePart.TKreuzungRechts: TKreuzungRechts(i, j);break;
+                        case MazePart.TKreuzungUnten: TKreuzungUnten(i, j);break;
+                    }
+                }
+            }
+            
+
+            //GangObenUnten(0, 0);
+            //GangObenUnten(0, 1);
+            //SackgasseOben(0, 2);
             //WandLinks(0, 0);
             //WandRechts(0, 0);
             //WandOben(0, 0);

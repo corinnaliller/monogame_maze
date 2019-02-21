@@ -51,6 +51,8 @@
     <Compile Include="IHierarchy.cs" />
     <Compile Include="ITransform.cs" />
     <Compile Include="MazeConstructor.cs" />
+    <Compile Include="MazeFloor.cs" />
+    <Compile Include="Mazemap.cs" />
     <Compile Include="Plane.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

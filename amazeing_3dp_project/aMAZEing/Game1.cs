@@ -25,15 +25,16 @@ namespace aMAZEing
         private Matrix projectionMatrix;
         private float aspectRatio;
         private MazeConstructor maze;
-        
+        private MazeFloor floor;
+        private Mazemap map;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            camera = new ArcBallCamera(this, new Vector3(0, 0, 10));
-            ((ArcBallCamera)camera).SetView(ViewMode.Back);
+            camera = new ArcBallCamera(this, new Vector3(20, 15, 30));
+            ((ArcBallCamera)camera).SetView(ViewMode.Front);
         }
 
         /// <summary>
@@ -62,7 +63,9 @@ namespace aMAZEing
             Texture2D gras = Content.Load<Texture2D>("Gras");
             Texture2D hecke = Content.Load<Texture2D>("Hecke");
             spieler = Content.Load<Model>("Teapot_red");
-            maze = new MazeConstructor(this,hecke, 7, 5);
+            map = new Mazemap();
+            maze = new MazeConstructor(this,hecke,map, 7, 5);
+            floor = new MazeFloor(this, gras, 5, map.MazeSize, map.MazeSize);
             p = new Plane(this, gras, 100, 1);
             teekanne = new Spieler(this, spieler);
             // TODO: use this.Content to load your game content here
@@ -135,8 +138,9 @@ namespace aMAZEing
             // TODO: Add your drawing code here
             g.Draw(camera);
             teekanne.Draw(gameTime, camera);
-            p.Draw(camera);
+            //p.Draw(camera);
             maze.Draw(camera);
+            floor.Draw(camera);
             base.Draw(gameTime);
         }
     }

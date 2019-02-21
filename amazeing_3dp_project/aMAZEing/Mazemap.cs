@@ -6,13 +6,23 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
-    class Mazemap
+    public class Mazemap
     {
         public MazePart[][] part;
+        
+        public int MazeSize
+        {
+            get { return part.Length; }
+        }
+        public MazePart[][] Part
+        {
+            get { return part; }
+        }
 
         public Mazemap()
         {
-            part = new MazePart[22][];
+            
+            part = new MazePart[23][];
             part[0] = new MazePart[] { MazePart.GangObenUnten, MazePart.TKreuzungRechts, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.TKreuzungRechts, MazePart.GangObenUnten, MazePart.SackgasseOben, MazePart.KurveObenRechts, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.KurveUntenRechts, MazePart.KurveObenRechts, MazePart.TKreuzungRechts, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.KurveUntenRechts};
             part[1] = new MazePart[] { MazePart.SackgasseLinks, MazePart.TKreuzungOben, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.KurveUntenRechts, MazePart.GangRechtsLinks, MazePart.KurveObenRechts, MazePart.GangObenUnten, MazePart.KurveUntenLinks, MazePart.SackgasseUnten, MazePart.GangObenUnten, MazePart.KurveUntenRechts, MazePart.GangRechtsLinks, MazePart.KurveObenLinks, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.KurveUntenRechts, MazePart.GangRechtsLinks };
             part[2] = new MazePart[] { MazePart.GangRechtsLinks, MazePart.GangRechtsLinks, MazePart.KurveObenRechts, MazePart.GangObenUnten, MazePart.GangObenUnten, MazePart.KurveUntenRechts, MazePart.GangRechtsLinks, MazePart.GangRechtsLinks, MazePart.GangRechtsLinks, MazePart.KurveObenRechts, MazePart.KurveUntenRechts, MazePart.KurveObenRechts, MazePart.KurveUntenRechts, MazePart.GangRechtsLinks, MazePart.GangRechtsLinks, MazePart.KurveObenLinks, MazePart.KurveUntenRechts, MazePart.SackgasseUnten, MazePart.KurveUntenRechts, MazePart.SackgasseLinks, MazePart.SackgasseLinks, MazePart.GangRechtsLinks, MazePart.SackgasseRechts};
