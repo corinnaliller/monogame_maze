@@ -10,7 +10,11 @@ namespace aMAZEing
 {
     public enum MazePart
     {
+<<<<<<< HEAD
         GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks, Kreuzung
+=======
+        GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks, Kreuzung, Wand
+>>>>>>> phil_arbeit
     }
     public class MazeConstructor
     {
@@ -59,9 +63,18 @@ namespace aMAZEing
             for (int i = 0; i < map.Part.Length; i++)
             {
                 WandLinks(-1, i);
+<<<<<<< HEAD
                 WandLinks(-1, i);
                 WandLinks(-1, i);
             }
+=======
+                WandRechts(map.Part.Length, i);
+            }
+            for (int i = 1; i < map.Part.Length; i++)
+            {
+                WandOben(i, -1);
+            } 
+>>>>>>> phil_arbeit
             for (int i = 0; i < map.Part.Length; i++)
             {
                 for(int j = 0; j < map.Part.Length-1; j++)
@@ -125,23 +138,39 @@ namespace aMAZEing
             WandRechts(x, z);
             WandLinks(x, z);
         }
+<<<<<<< HEAD
         private void SackgasseRechts(int x, int z)
+=======
+        private void SackgasseLinks(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandOben(x, z);
             WandUnten(x, z);
             WandRechts(x, z);
         }
+<<<<<<< HEAD
         private void SackgasseLinks(int x, int z)
+=======
+        private void SackgasseRechts(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandOben(x, z);
             WandUnten(x, z);
             WandLinks(x, z);
         }
+<<<<<<< HEAD
         private void TKreuzungRechts(int x, int z)
         {
             WandLinks(x, z);
         }
         private void TKreuzungLinks(int x, int z)
+=======
+        private void TKreuzungLinks(int x, int z)
+        {
+            WandLinks(x, z);
+        }
+        private void TKreuzungRechts(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandRechts(x, z);
         }
@@ -153,22 +182,38 @@ namespace aMAZEing
         {
             WandOben(x, z);
         }
+<<<<<<< HEAD
         private void KurveUntenRechts(int x, int z)
+=======
+        private void KurveUntenLinks(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandLinks(x, z);
             WandOben(x, z);
         }
+<<<<<<< HEAD
         private void KurveUntenLinks(int x, int z)
+=======
+        private void KurveUntenRechts(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandRechts(x, z);
             WandOben(x, z);
         }
+<<<<<<< HEAD
         private void KurveObenRechts(int x, int z)
+=======
+        private void KurveObenLinks(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandLinks(x, z);
             WandUnten(x, z);
         }
+<<<<<<< HEAD
         private void KurveObenLinks(int x, int z)
+=======
+        private void KurveObenRechts(int x, int z)
+>>>>>>> phil_arbeit
         {
             WandRechts(x, z);
             WandUnten(x, z);

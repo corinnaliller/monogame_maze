@@ -19,6 +19,7 @@ namespace aMAZEing
         private ICamera camera;
         private Grid g;
         private Spieler teekanne;
+<<<<<<< HEAD
         string text, modelRotationstr;
         private float modelRotation = 0.0f;
         private double modelRotationdeg;
@@ -27,6 +28,11 @@ namespace aMAZEing
         private MazeConstructor maze;
         private MazeFloor floor;
         private Mazemap map;
+=======
+        private MazeConstructor maze;
+        private Mazemap map;
+        private MazeFloor floor;
+>>>>>>> phil_arbeit
 
         public Game1()
         {
@@ -64,9 +70,15 @@ namespace aMAZEing
             Texture2D hecke = Content.Load<Texture2D>("Hecke");
             spieler = Content.Load<Model>("Teapot_red");
             map = new Mazemap();
+<<<<<<< HEAD
             maze = new MazeConstructor(this,hecke,map, 7, 5);
             floor = new MazeFloor(this, gras, 5, map.MazeSize, map.MazeSize);
             p = new Plane(this, gras, 100, 1);
+=======
+            maze = new MazeConstructor(this, hecke, map, 7, 5);
+            floor = new MazeFloor(this, gras, 5, map.Part.Length, map.Part.Length);
+            //p = new Plane(this, gras, 100, 1);
+>>>>>>> phil_arbeit
             teekanne = new Spieler(this, spieler);
             // TODO: use this.Content to load your game content here
         }
@@ -91,6 +103,7 @@ namespace aMAZEing
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
+<<<<<<< HEAD
             modelRotationstr = Convert.ToString(modelRotation);
             speedx = (Math.Sin(modelRotation)) * 30;
             speedz = (Math.Cos(modelRotation)) * 30;
@@ -110,6 +123,9 @@ namespace aMAZEing
                 pos += Vector3.Right * speedxdouble;
             }
 
+=======
+            teekanne.Update(gameTime);
+>>>>>>> phil_arbeit
             base.Update(gameTime);
         }
 

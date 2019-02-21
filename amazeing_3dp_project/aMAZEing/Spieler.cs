@@ -14,7 +14,19 @@ namespace aMAZEing
     {
         
         private Model model;
+<<<<<<< HEAD
         
+=======
+        private float speed = 5;
+        public float Speed
+        {
+            get { return speed; }
+            set
+            {
+                ;
+            }
+        }
+>>>>>>> phil_arbeit
         
         
 
@@ -33,6 +45,7 @@ namespace aMAZEing
             model.Draw(LocalToWorld, camera.View, camera.Projection);
         }
 
+<<<<<<< HEAD
         public override void Update(GameTime gameTime)
         {
            
@@ -47,5 +60,30 @@ namespace aMAZEing
         }
 
        
+=======
+        
+
+        public override void Update(GameTime gametime)
+        {
+            KeyboardState keys = Keyboard.GetState();
+
+            if (keys.IsKeyDown(Keys.Down))
+            {
+                Position = Position + (Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+            }
+            if (keys.IsKeyDown(Keys.Up))
+            {
+                Position = Position + (Backward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+            }
+            if (keys.IsKeyDown(Keys.Left))
+            {
+                Position = Position + (Right * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+            }
+            if (keys.IsKeyDown(Keys.Right))
+            {
+                Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+            }
+        }
+>>>>>>> phil_arbeit
     }
 }
