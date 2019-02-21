@@ -78,6 +78,7 @@ namespace aMAZEing
 
             teekanne = new Spieler(this, spieler, map.ZielFeld);
             teekanne.Position = new Vector3(2.5f, 2, 2.5f);
+            
             camera = new ArcBallCamera(this,teekanne);
             //camera = new TrackingCamera(this);
             //camera.Position = new Vector3(0, 5, 2);

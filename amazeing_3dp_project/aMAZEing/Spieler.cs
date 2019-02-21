@@ -49,21 +49,21 @@ namespace aMAZEing
 
             if (keys.IsKeyDown(Keys.Down))
             {
-                Position = Position + (Vector3.Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
             if (keys.IsKeyDown(Keys.Up))
             {
-                Position = Position + (Vector3.Backward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Backward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
             if (keys.IsKeyDown(Keys.Left))
             {
-                Position = Position + (Vector3.Right * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Right * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
             if (keys.IsKeyDown(Keys.Right))
             {
-                Position = Position + (Vector3.Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
-            Forward = Position - ziel;
+            //Forward = Position - ziel;
         }
     }
 }

@@ -60,12 +60,15 @@ namespace aMAZEing
             for (int i = 0; i < map.Part.Length; i++)
             {
                 WandLinks(-1, i);
-                WandRechts(map.Part.Length, i);
-            }
-            for (int i = 1; i < map.Part.Length; i++)
-            {
                 WandOben(i, -1);
+                WandRechts(map.Part.Length, i);
+                if(i != map.ZielFeld.X)
+                {
+                    WandUnten(i, map.Part.Length);
+                }
+                
             }
+            
             for (int i = 0; i < map.Part.Length; i++)
             {
                 for(int j = 0; j < map.Part.Length-1; j++)

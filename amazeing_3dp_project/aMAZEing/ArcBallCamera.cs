@@ -143,19 +143,19 @@ namespace aMAZEing
             }
             if (currentKeyBoardState.IsKeyDown(Keys.Down))
             {
-                Position = Position + (Vector3.Forward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                Position = Position + (target.Forward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
             }
             if (currentKeyBoardState.IsKeyDown(Keys.Up))
             {
-                Position = Position + (Vector3.Backward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                Position = Position + (target.Backward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
             }
             if (currentKeyBoardState.IsKeyDown(Keys.Left))
             {
-                Position = Position + (Vector3.Right * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                Position = Position + (target.Right * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
             }
             if (currentKeyBoardState.IsKeyDown(Keys.Right))
             {
-                Position = Position + (Vector3.Left * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                Position = Position + (target.Left * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
             }
 
             base.Update(gameTime);
