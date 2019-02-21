@@ -14,40 +14,42 @@ namespace aMAZEing
     }
     public class MazeConstructor
     {
-        private List<VertexPositionTexture> vertexList;
-        private List<short> indexList;
+        private List<VertexPositionTexture> vertexListWaende;
+        private List<short> indexListWaende;
         private int height;
         private int step;
-        private BasicEffect effect;
-        private Texture2D texture;
-        private IndexBuffer indexBuffer;
-        private VertexBuffer vertexBuffer;
+        private BasicEffect wandEffect;
+        private Texture2D hecke;
+        private IndexBuffer indexBufferWaende;
+        private VertexBuffer vertexBufferWaende;
         private Game game;
 
-        public VertexPositionTexture[] Vertices
+        public VertexPositionTexture[] VerticesWaende
         {
             get
             {
-                return vertexList.ToArray();
+                return vertexListWaende.ToArray();
             }
         }
-        public short[] Indices
+        
+        public short[] IndicesWaende
         {
             get
             {
-                return indexList.ToArray();
+                return indexListWaende.ToArray();
             }
         }
+        
 
-        public MazeConstructor(Game game,Texture2D texture,int height, int step)
+        public MazeConstructor(Game game,Texture2D textureWand, int height, int step)
         {
-            vertexList = new List<VertexPositionTexture>();
-            indexList = new List<short>();
+            vertexListWaende = new List<VertexPositionTexture>();
+            indexListWaende = new List<short>();
             this.game = game;
             this.height = height;
             this.step = step;
-            this.texture = texture;
-            effect = new BasicEffect(game.GraphicsDevice);
+            this.hecke = textureWand;
+            wandEffect = new BasicEffect(game.GraphicsDevice);
             CreateMaze();
         }
         private void CreateMaze()
@@ -62,10 +64,12 @@ namespace aMAZEing
             //WandRechts(0, 0);
             //WandOben(0, 0);
             //WandUnten(0, 0);
-            vertexBuffer = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionTexture), Vertices.Length, BufferUsage.WriteOnly);
-            vertexBuffer.SetData<VertexPositionTexture>(Vertices);
-            indexBuffer = new IndexBuffer(game.GraphicsDevice, typeof(short), Indices.Length, BufferUsage.WriteOnly);
-            indexBuffer.SetData<short>(Indices);
+            vertexBufferWaende = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionTexture), VerticesWaende.Length, BufferUsage.WriteOnly);
+            vertexBufferWaende.SetData<VertexPositionTexture>(VerticesWaende);
+
+            indexBufferWaende = new IndexBuffer(game.GraphicsDevice, typeof(short), IndicesWaende.Length, BufferUsage.WriteOnly);
+            indexBufferWaende.SetData<short>(IndicesWaende);
+            
         }
         
         private void GangObenUnten(int x, int z)
@@ -139,79 +143,85 @@ namespace aMAZEing
             WandUnten(x, z);
         }
 
+        
         private void WandRechts(int x, int z)
         {
-            int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step), new Vector2(0,0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step), new Vector2(0,1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step + step), new Vector2(1,0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step + step), new Vector2(1,1)));
+            int oldIndex = vertexListWaende.Count;
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step), new Vector2(0,0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step), new Vector2(0,1)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step + step), new Vector2(1,0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step + step), new Vector2(1,1)));
 
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
-            indexList.Add(Convert.ToInt16(oldIndex + 1));
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 2));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
         }
         private void WandLinks(int x, int z)
         {
-            int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(0, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(0, 1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
+            int oldIndex = vertexListWaende.Count;
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(0, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(0, 1)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 1));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
-            indexList.Add(Convert.ToInt16(oldIndex + 2));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
         }
         private void WandOben(int x, int z)
         {
-            int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step + step), new Vector2(0, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step + step), new Vector2(0, 1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
+            int oldIndex = vertexListWaende.Count;
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step + step), new Vector2(0, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step + step), new Vector2(0, 1)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
-            indexList.Add(Convert.ToInt16(oldIndex + 1));
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 2));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
         }
         private void WandUnten(int x, int z)
         {
-            int oldIndex = vertexList.Count;
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step), new Vector2(0, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step), new Vector2(0, 1)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 0)));
-            vertexList.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(1, 1)));
+            int oldIndex = vertexListWaende.Count;
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step), new Vector2(0, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step), new Vector2(0, 1)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(1, 1)));
 
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 1));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
-            indexList.Add(Convert.ToInt16(oldIndex));
-            indexList.Add(Convert.ToInt16(oldIndex + 3));
-            indexList.Add(Convert.ToInt16(oldIndex + 2));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
         }
         public void Draw(ICamera camera)
         {
-            effect.Projection = camera.Projection;
-            effect.View = camera.View;
-            effect.World = Matrix.Identity;
-            effect.TextureEnabled = true;
-            effect.Texture = texture;
+            wandEffect.Projection = camera.Projection;
+            wandEffect.View = camera.View;
+            wandEffect.World = Matrix.Identity;
+            wandEffect.TextureEnabled = true;
+            wandEffect.Texture = hecke;
+            wandEffect.CurrentTechnique.Passes[0].Apply();
+            bodenEffect.Projection = camera.Projection;
+            bodenEffect.View = camera.View;
+            bodenEffect.World = Matrix.Identity;
+            bodenEffect.TextureEnabled = true;
+            bodenEffect.Texture = gras;
+            bodenEffect.CurrentTechnique.Passes[0].Apply();
+            game.GraphicsDevice.SetVertexBuffer(vertexBufferWaende);
+            game.GraphicsDevice.Indices = indexBufferWaende;
 
-            effect.CurrentTechnique.Passes[0].Apply();
-            game.GraphicsDevice.SetVertexBuffer(vertexBuffer);
-            game.GraphicsDevice.Indices = indexBuffer;
-
-            game.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, Indices.Length / 3);
+            game.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, IndicesWaende.Length / 3);
         }
     }
 }
