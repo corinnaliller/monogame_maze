@@ -11,6 +11,8 @@ namespace aMAZEing
 {
     class Spieler : GameObject
     {
+        Vector3 pos;
+        BoundingBox box;
         private Model model;
         private float speed = 5;
         public float Speed
@@ -27,6 +29,7 @@ namespace aMAZEing
         public Spieler(Game game, Model model) : base(game)
         {
             this.model = model;
+            box = BoundingBox(Position);
         }
 
         public void Draw(GameTime gameTime, ICamera camera)
