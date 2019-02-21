@@ -56,6 +56,7 @@ namespace aMAZEing
         }
         private void CreateMaze(Mazemap map)
         {
+            //Decke(0, 0);
             for (int i = 0; i < map.Part.Length; i++)
             {
                 WandLinks(-1, i);
@@ -86,6 +87,7 @@ namespace aMAZEing
                         case MazePart.TKreuzungOben: TKreuzungOben(i, j);break;
                         case MazePart.TKreuzungRechts: TKreuzungRechts(i, j);break;
                         case MazePart.TKreuzungUnten: TKreuzungUnten(i, j);break;
+                        case MazePart.Wand: Wand(i, j);break;
                     }
                 }
             }
@@ -105,7 +107,10 @@ namespace aMAZEing
             indexBufferWaende.SetData<short>(IndicesWaende);
             
         }
-        
+        private void Wand(int x, int z)
+        {
+            Decke(x, z);
+        }
         private void GangObenUnten(int x, int z)
         {
             WandLinks(x, z);
@@ -182,7 +187,21 @@ namespace aMAZEing
             WandUnten(x, z);
         }
 
-        
+        private void Decke(int x, int z)
+        {
+            int oldIndex = vertexListWaende.Count;
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step), new Vector2(0, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step+step, height, z * step), new Vector2(0, 1)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step+step, height, z * step + step), new Vector2(1, 0)));
+            vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step + step), new Vector2(1, 1)));
+
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
+            indexListWaende.Add(Convert.ToInt16(oldIndex));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
+            indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
+        }
         private void WandRechts(int x, int z)
         {
             int oldIndex = vertexListWaende.Count;

@@ -32,7 +32,8 @@ namespace aMAZEing
         private Keys zoomOutKey = Keys.Subtract;
         private float scrollSpeed = 0.5f;
         private float fastScrollSpeed = 4;
-
+        private GameObject target;
+        private float offsetX, offsetZ;
         #region Public Properties
 
         public float Distance
@@ -59,25 +60,29 @@ namespace aMAZEing
 
         #endregion
 
-        public ArcBallCamera(Game game, Vector3 position) :
-            this(game, position, Vector3.Zero)
-        { }
+        public ArcBallCamera(Game game, Vector3 position) : base(game,position)
+        {
+            Target = Vector3.Zero;
+        }
 
-        public ArcBallCamera(Game game, Vector3 position, Vector3 target) :
+        public ArcBallCamera(Game game, Vector3 position, GameObject target) :
             base(game, position)
         {
-            this.distance = (target - position).Length();
+            this.target = target;
+            this.distance = (target.Position - position).Length();
         }
 
         public override void Update(GameTime gameTime)
         {
-
+            Target = target.Position;
+            
 
             KeyboardState currentKeyBoardState = Keyboard.GetState();
 
             // Zoom in/out
-            float distanceDelta = 0;
+            //float distanceDelta = 0;
 
+            /*
             if (currentKeyBoardState.IsKeyDown(zoomInKey))
                 distanceDelta += (float)(-40 * scrollSpeed * gameTime.ElapsedGameTime.TotalSeconds);
 
@@ -107,6 +112,7 @@ namespace aMAZEing
                     }
                 }
             }
+            */
 
 
             if (currentKeyBoardState.IsKeyDown(leftKey))
@@ -136,7 +142,7 @@ namespace aMAZEing
 
         public override void LookAt(Vector3 target)
         {
-            Distance = (target - Position).Length();
+            //Distance = (target - Position).Length();
             base.LookAt(target);
         }
 

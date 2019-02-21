@@ -28,14 +28,20 @@ namespace aMAZEing
         private MazeFloor floor;
         private Mazemap map;
 
+        public Vector3 SpielerPosition
+        {
+            get
+            {
+                return teekanne.Position;
+            }
+        }
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            camera = new ArcBallCamera(this, new Vector3(20, 15, 30));
-            ((ArcBallCamera)camera).SetView(ViewMode.Front);
+            
         }
 
         /// <summary>
@@ -64,13 +70,20 @@ namespace aMAZEing
             Texture2D gras = Content.Load<Texture2D>("Gras");
             Texture2D hecke = Content.Load<Texture2D>("Hecke");
             spieler = Content.Load<Model>("Teapot_red");
-            map = new Mazemap();
+            map = new Mazemap(1);
             maze = new MazeConstructor(this,hecke,map, 7, 5);
             floor = new MazeFloor(this, gras, 5, map.MazeSize, map.MazeSize);
             p = new Plane(this, gras, 100, 1);
-
+            
 
             teekanne = new Spieler(this, spieler);
+            teekanne.Position = new Vector3(2.5f, 2, 2.5f);
+            camera = new ArcBallCamera(this, new Vector3(2.5f, 2.5f, 0), teekanne);
+            //camera = new TrackingCamera(this);
+            //camera.Position = new Vector3(0, 5, 2);
+            //((TrackingCamera)camera).Track(teekanne);
+            //((ArcBallCamera)camera).SetView(ViewMode.Front);
+            ((ArcBallCamera)camera).Target = teekanne.Position;
             // TODO: use this.Content to load your game content here
         }
 
@@ -93,6 +106,7 @@ namespace aMAZEing
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
+            //((TrackingCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
 
             teekanne.Update(gameTime);
