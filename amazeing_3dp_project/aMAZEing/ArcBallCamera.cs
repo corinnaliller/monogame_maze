@@ -30,10 +30,6 @@ namespace aMAZEing
         private Keys downKey = Keys.S;
         private Keys zoomInKey = Keys.Add;
         private Keys zoomOutKey = Keys.Subtract;
-        private Keys liftUpKey = Keys.Up;
-        private Keys liftDownKey = Keys.Down;
-        private Keys shiftLeftKey = Keys.Left;
-        private Keys shiftRightKey = Keys.Right;
         private float scrollSpeed = 0.5f;
         private float fastScrollSpeed = 4;
 
@@ -134,17 +130,7 @@ namespace aMAZEing
             }
 
 
-            if (currentKeyBoardState.IsKeyDown(liftUpKey))
-                Target = Target + Down * rotationSpeed / 10f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (currentKeyBoardState.IsKeyDown(liftDownKey))
-                Target = Target + Up * rotationSpeed / 10f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (currentKeyBoardState.IsKeyDown(shiftLeftKey))
-                Target = Target + Left * rotationSpeed / 10f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (currentKeyBoardState.IsKeyDown(shiftRightKey))
-                Target = Target + Right * rotationSpeed / 10f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+          
 
 
             base.Update(gameTime);

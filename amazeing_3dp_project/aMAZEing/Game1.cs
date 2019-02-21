@@ -74,7 +74,7 @@ namespace aMAZEing
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
-
+            teekanne.Update(gameTime);
             base.Update(gameTime);
         }
 
