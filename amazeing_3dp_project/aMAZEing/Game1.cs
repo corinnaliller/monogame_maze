@@ -33,7 +33,7 @@ namespace aMAZEing
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            camera = new ArcBallCamera(this, new Vector3(20, 15, 30));
+            camera = new ArcBallCamera(this, new Vector3(40, 15, 30));
             ((ArcBallCamera)camera).SetView(ViewMode.Front);
         }
 

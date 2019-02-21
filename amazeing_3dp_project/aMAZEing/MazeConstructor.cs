@@ -10,7 +10,7 @@ namespace aMAZEing
 {
     public enum MazePart
     {
-        GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks, Kreuzung
+        GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks, Kreuzung, Wand
     }
     public class MazeConstructor
     {
@@ -59,9 +59,12 @@ namespace aMAZEing
             for (int i = 0; i < map.Part.Length; i++)
             {
                 WandLinks(-1, i);
-                WandLinks(-1, i);
-                WandLinks(-1, i);
+                WandRechts(map.Part.Length, i);
             }
+            for (int i = 1; i < map.Part.Length; i++)
+            {
+                WandOben(i, -1);
+            } 
             for (int i = 0; i < map.Part.Length; i++)
             {
                 for(int j = 0; j < map.Part.Length-1; j++)
