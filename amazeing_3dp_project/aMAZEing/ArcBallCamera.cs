@@ -30,10 +30,6 @@ namespace aMAZEing
         private Keys downKey = Keys.S;
         private Keys zoomInKey = Keys.Add;
         private Keys zoomOutKey = Keys.Subtract;
-<<<<<<< HEAD
-        
-=======
->>>>>>> phil_arbeit
         private float scrollSpeed = 0.5f;
         private float fastScrollSpeed = 4;
 
@@ -132,14 +128,6 @@ namespace aMAZEing
             {
                 RotateAround(Position + (Forward * distance), Right, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
-
-
-<<<<<<< HEAD
-            
-=======
-          
->>>>>>> phil_arbeit
-
 
             base.Update(gameTime);
         }

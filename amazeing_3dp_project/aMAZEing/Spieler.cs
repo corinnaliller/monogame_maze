@@ -14,9 +14,6 @@ namespace aMAZEing
     {
         
         private Model model;
-<<<<<<< HEAD
-        
-=======
         private float speed = 5;
         public float Speed
         {
@@ -25,9 +22,7 @@ namespace aMAZEing
             {
                 ;
             }
-        }
->>>>>>> phil_arbeit
-        
+        }       
         
 
         public Spieler(Game game, Model model) : base(game)
@@ -45,23 +40,6 @@ namespace aMAZEing
             model.Draw(LocalToWorld, camera.View, camera.Projection);
         }
 
-<<<<<<< HEAD
-        public override void Update(GameTime gameTime)
-        {
-           
-            
-
-            base.Update(gameTime);
-
-
-
-
-
-        }
-
-       
-=======
-        
 
         public override void Update(GameTime gametime)
         {
@@ -84,6 +62,5 @@ namespace aMAZEing
                 Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
         }
->>>>>>> phil_arbeit
     }
 }
