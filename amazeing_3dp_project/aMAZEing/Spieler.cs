@@ -50,6 +50,7 @@ namespace aMAZEing
             if (keys.IsKeyDown(Keys.Down))
             {
                 Position = Position + (Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
+                
             }
             if (keys.IsKeyDown(Keys.Up))
             {

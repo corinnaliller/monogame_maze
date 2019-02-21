@@ -21,22 +21,14 @@ namespace aMAZEing
     }
     public class ArcBallCamera : StaticCamera
     {
-        private float distanceBehindTarget = 2f;
-        private float distanceAboveTarget = 2f;
         private float distance;
         private float rotationSpeed = 60;
         private float speed;
-        private Keys fastKey = Keys.LeftShift;
         private Keys leftKey = Keys.A;
         private Keys rightKey = Keys.D;
         private Keys upKey = Keys.W;
         private Keys downKey = Keys.S;
-        private Keys zoomInKey = Keys.Add;
-        private Keys zoomOutKey = Keys.Subtract;
-        private float scrollSpeed = 0.5f;
-        private float fastScrollSpeed = 4;
         private GameObject target;
-        private float offsetX, offsetZ;
         #region Public Properties
 
         public float Distance
@@ -63,7 +55,7 @@ namespace aMAZEing
 
         #endregion
 
-        public ArcBallCamera(Game game, GameObject target) : this(game,target.Position - new Vector3(2,-2,2),target)
+        public ArcBallCamera(Game game, GameObject target) : this(game,target.Position - new Vector3(0,-2,3),target)
         {
         }
         public ArcBallCamera(Game game, Vector3 position) : base(game,position)
@@ -86,50 +78,17 @@ namespace aMAZEing
 
             KeyboardState currentKeyBoardState = Keyboard.GetState();
 
-            // Zoom in/out
-            //float distanceDelta = 0;
-
-            /*
-            if (currentKeyBoardState.IsKeyDown(zoomInKey))
-                distanceDelta += (float)(-40 * scrollSpeed * gameTime.ElapsedGameTime.TotalSeconds);
-
-            if (currentKeyBoardState.IsKeyDown(zoomOutKey))
-                distanceDelta += (float)(40 * scrollSpeed * gameTime.ElapsedGameTime.TotalSeconds);
-
-            if (distanceDelta != 0)
-            {
-                if (currentKeyBoardState.IsKeyDown(fastKey))
-                    distanceDelta *= fastScrollSpeed / scrollSpeed;
-
-                float newDistance = Distance + distanceDelta;
-
-                if (newDistance < NearPlane)
-                {
-                    Distance = NearPlane;
-                }
-                else
-                {
-                    if (newDistance > FarPlane)
-                    {
-                        Distance = FarPlane;
-                    }
-                    else
-                    {
-                        Distance = newDistance;
-                    }
-                }
-            }
-            */
-
 
             if (currentKeyBoardState.IsKeyDown(leftKey))
             {
                 RotateAround(Position + (Forward * distance), Vector3.Up, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                target.Rotate(0, ((float)gameTime.ElapsedGameTime.TotalSeconds),0);
             }
 
             if (currentKeyBoardState.IsKeyDown(rightKey))
             {
                 RotateAround(Position + (Forward * distance), Vector3.Up, -rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                target.Rotate(0, -((float)gameTime.ElapsedGameTime.TotalSeconds), 0);
             }
 
             if (currentKeyBoardState.IsKeyDown(upKey))
