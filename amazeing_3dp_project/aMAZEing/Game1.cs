@@ -59,7 +59,9 @@ namespace aMAZEing
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Texture2D gras = Content.Load<Texture2D>("Gras");
+            Texture2D hecke = Content.Load<Texture2D>("Hecke");
             spieler = Content.Load<Model>("Teapot_red");
+            maze = new MazeConstructor(this,hecke, 7, 5);
             p = new Plane(this, gras, 100, 1);
             teekanne = new Spieler(this, spieler);
             // TODO: use this.Content to load your game content here
@@ -133,6 +135,7 @@ namespace aMAZEing
             g.Draw(camera);
             teekanne.Draw(gameTime, camera);
             p.Draw(camera);
+            maze.Draw(camera);
             base.Draw(gameTime);
         }
     }
