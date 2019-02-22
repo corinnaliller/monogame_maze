@@ -11,15 +11,14 @@ namespace aMAZEing
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
         private Model spieler, arrow,hintArrow;
         private Vector3 pos;
-        double speedx, speedz;
         private Plane p;
         private ICamera camera;
         private Grid g;
         private Spieler teekanne;
-        string text, modelRotationstr;
+
         private float modelRotation = 0.0f;
         private double modelRotationdeg;
         private Matrix projectionMatrix;
@@ -29,6 +28,8 @@ namespace aMAZEing
         private Mazemap map;
         private Kompass kompass;
         private Hint hint;
+        private SpriteFont font;
+        private Timer timer;
 
         public Spieler Player
         {
@@ -66,6 +67,7 @@ namespace aMAZEing
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("Time");
             Texture2D gras = Content.Load<Texture2D>("Gras");
             Texture2D hecke = Content.Load<Texture2D>("Hecke");
             spieler = Content.Load<Model>("Teapot_red");
@@ -83,7 +85,7 @@ namespace aMAZEing
             hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.3f) };
             
             camera = new ArcBallCamera(this,teekanne);
-
+            timer = new Timer(this, font);
         }
 
         /// <summary>
@@ -106,10 +108,10 @@ namespace aMAZEing
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
-
             teekanne.Update(gameTime);
             kompass.Update(gameTime);
             hint.Update(gameTime);
+            timer.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -136,13 +138,16 @@ namespace aMAZEing
             }
 
             // TODO: Add your drawing code here
-            g.Draw(camera);
-            teekanne.Draw(gameTime, camera);
-            kompass.Draw(gameTime, camera);
-            hint.Draw(gameTime, camera);
+            
+            //g.Draw(camera);
+            
             //p.Draw(camera);
             maze.Draw(camera);
             floor.Draw(camera);
+            teekanne.Draw(gameTime, camera);
+            kompass.Draw(gameTime, camera);
+            hint.Draw(gameTime, camera);
+            //timer.Draw(gameTime);
             base.Draw(gameTime);
         }
     }
