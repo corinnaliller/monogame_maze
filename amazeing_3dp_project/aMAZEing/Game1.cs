@@ -23,7 +23,7 @@ namespace aMAZEing
         private double modelRotationdeg;
         private Matrix projectionMatrix;
         private float aspectRatio;
-        private MazeConstructor maze;
+        public MazeConstructor maze;
         private MazeFloor floor;
         private Mazemap map;
         private Kompass kompass;
@@ -85,8 +85,7 @@ namespace aMAZEing
             p = new Plane(this, gras, 100, 1);
             
 
-            teekanne = new Spieler(this, spieler);
-            teekanne.Position = new Vector3(2.5f, 2, 2.5f);
+            teekanne = new Spieler(this, spieler) { Position = new Vector3(map.AnfangsFeld.X + 2.5f, 4, map.AnfangsFeld.Y + 2.5f) };
             kompass = new Kompass(this, arrow, teekanne) { Scale = new Vector3(0.15f) };
             hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.2f) };
             
@@ -119,6 +118,10 @@ namespace aMAZEing
             hint.Update(gameTime);
             //timer.Update(gameTime);
             base.Update(gameTime);
+
+            
+
+            
         }
 
         /// <summary>
