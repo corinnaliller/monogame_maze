@@ -66,14 +66,6 @@ namespace aMAZEing
             for (int i = 0; i < map.Part.Length; i++)
             {
                 WandLinks(-1, i);
-<<<<<<< HEAD
-                WandRechts(map.Part.Length, i);
-            }
-            for (int i = 1; i < map.Part.Length; i++)
-            {
-                WandOben(i, -1);
-            } 
-=======
                 WandOben(i, -1);
                 WandRechts(map.Part.Length, i);
                 if(i != map.ZielFeld.X)
@@ -82,8 +74,6 @@ namespace aMAZEing
                 }
                 
             }
-            
->>>>>>> 31df008b55584aa006688a38facc473638ce3eea
             for (int i = 0; i < map.Part.Length; i++)
             {
                 for(int j = 0; j < map.Part.Length-1; j++)
@@ -109,15 +99,6 @@ namespace aMAZEing
                     }
                 }
             }
-            
-
-            //GangObenUnten(0, 0);
-            //GangObenUnten(0, 1);
-            //SackgasseOben(0, 2);
-            //WandLinks(0, 0);
-            //WandRechts(0, 0);
-            //WandOben(0, 0);
-            //WandUnten(0, 0);
             vertexBufferWaende = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionTexture), VerticesWaende.Length, BufferUsage.WriteOnly);
             vertexBufferWaende.SetData<VertexPositionTexture>(VerticesWaende);
 

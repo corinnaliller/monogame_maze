@@ -31,6 +31,10 @@ namespace aMAZEing
         private SpriteFont font;
         private Timer timer;
 
+        public ICamera Camera
+        {
+            get { return camera; }
+        }
         public Spieler Player
         {
             get { return teekanne; }
@@ -39,14 +43,10 @@ namespace aMAZEing
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 800;
             Content.RootDirectory = "Content";
 
-<<<<<<< HEAD
-            camera = new ArcBallCamera(this, new Vector3(40, 15, 30));
-            ((ArcBallCamera)camera).SetView(ViewMode.Front);
-=======
-            
->>>>>>> 31df008b55584aa006688a38facc473638ce3eea
         }
 
         /// <summary>
@@ -58,8 +58,9 @@ namespace aMAZEing
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            g = new Grid(this, 5, 10, Color.Gray, Color.Red, Color.Blue);
+            //g = new Grid(this, 5, 10, Color.Gray, Color.Red, Color.Blue);
             pos = Vector3.Zero;
+            
             base.Initialize();
            
         }
@@ -87,7 +88,7 @@ namespace aMAZEing
             teekanne = new Spieler(this, spieler);
             teekanne.Position = new Vector3(2.5f, 2, 2.5f);
             kompass = new Kompass(this, arrow, teekanne) { Scale = new Vector3(0.15f) };
-            hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.3f) };
+            hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.2f) };
             
             camera = new ArcBallCamera(this,teekanne);
             timer = new Timer(this, font);
@@ -116,7 +117,7 @@ namespace aMAZEing
             teekanne.Update(gameTime);
             kompass.Update(gameTime);
             hint.Update(gameTime);
-            timer.Update(gameTime);
+            //timer.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -152,7 +153,7 @@ namespace aMAZEing
             teekanne.Draw(gameTime, camera);
             kompass.Draw(gameTime, camera);
             hint.Draw(gameTime, camera);
-            //timer.Draw(gameTime);
+            timer.Draw(gameTime);
             base.Draw(gameTime);
         }
     }
