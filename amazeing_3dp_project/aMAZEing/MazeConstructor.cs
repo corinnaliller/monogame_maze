@@ -74,7 +74,6 @@ namespace aMAZEing
                 }
                 
             }
-            
             for (int i = 0; i < map.Part.Length; i++)
             {
                 for(int j = 0; j < map.Part.Length-1; j++)
@@ -100,15 +99,6 @@ namespace aMAZEing
                     }
                 }
             }
-            
-
-            //GangObenUnten(0, 0);
-            //GangObenUnten(0, 1);
-            //SackgasseOben(0, 2);
-            //WandLinks(0, 0);
-            //WandRechts(0, 0);
-            //WandOben(0, 0);
-            //WandUnten(0, 0);
             vertexBufferWaende = new VertexBuffer(game.GraphicsDevice, typeof(VertexPositionTexture), VerticesWaende.Length, BufferUsage.WriteOnly);
             vertexBufferWaende.SetData<VertexPositionTexture>(VerticesWaende);
 

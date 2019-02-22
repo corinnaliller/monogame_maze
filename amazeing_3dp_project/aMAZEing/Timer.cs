@@ -13,6 +13,7 @@ namespace aMAZEing
         private Game game;
         private int zeit;
         private SpriteFont font;
+        private BasicEffect basicEffect;
 
         public string ZeitString
         {
@@ -39,6 +40,11 @@ namespace aMAZEing
             this.game = game;
             this.zeit = 0;
             this.font = font;
+            basicEffect = new BasicEffect(game.GraphicsDevice)
+            {
+                TextureEnabled = true,
+                VertexColorEnabled = true,
+            };
         }
 
         public void Update(GameTime gameTime)
@@ -49,10 +55,20 @@ namespace aMAZEing
         {
             Game1 g = game as Game1;
 
-            //g.spriteBatch.Begin(0, BlendState.Opaque, null, null, null, desaturateEffect);
-            //g.spriteBatch.Draw(font, ZeitString, new Vector2(100, 100), Color.Black);
+
+            //Vector3 textPosition = new Vector3(0, 45, 0);
+
+            //basicEffect.World = Matrix.CreateConstrainedBillboard(textPosition, textPosition - g.Camera.Forward, Vector3.Down, null, null);
+            //basicEffect.View = g.Camera.View;
+            //basicEffect.Projection = g.Camera.Projection;
+
+            //const string message = "hello, world!";
+            //Vector2 textOrigin = font.MeasureString(message) / 2;
+            //const float textSize = 0.25f;
+
+            //g.spriteBatch.Begin(0, null, null, DepthStencilState.DepthRead, RasterizerState.CullNone, basicEffect);
+            //g.spriteBatch.DrawString(font, message, Vector2.Zero, Color.White, 0, textOrigin, textSize, 0, 0);
             //g.spriteBatch.End();
-           
         }
     }
 }
