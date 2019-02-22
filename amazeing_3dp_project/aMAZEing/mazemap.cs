@@ -9,7 +9,7 @@ namespace aMAZEing
 {
     /**
      * Jacqueline Klein
-     * 
+     * Enthält zwei verschiedene Labyrinthkarten, zerlegt in ihre Teile (Gänge, Abzweigungen, etc.)
      */
     public class Mazemap
     {

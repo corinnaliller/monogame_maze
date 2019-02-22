@@ -51,7 +51,7 @@ namespace aMAZEing
             }
         }
 
-        public Vector3 Target
+        public override Vector3 Target
         {
             get { return Position + (Forward * distance); }
             set

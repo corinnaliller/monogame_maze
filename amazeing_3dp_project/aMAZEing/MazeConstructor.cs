@@ -19,7 +19,7 @@ namespace aMAZEing
 
     /**
      * Corinna Liller
-     * Diese Klasse legt mithilfe der obigen Enum und einer Mazemap
+     * Diese Klasse legt mithilfe der obigen Enum und einer Mazemap ein Labyrinth an.
      */
     public class MazeConstructor
     {
@@ -69,9 +69,11 @@ namespace aMAZEing
             this.map = map;
             CreateMaze(map);
         }
+        /**
+         * Diese Methode erzeugt das Labyrinth
+         */
         private void CreateMaze(Mazemap map)
         {
-            //Decke(0, 0);
             for (int i = 0; i < map.Part.Length; i++)
             {
                 WandLinks(-1, i);
@@ -112,9 +114,11 @@ namespace aMAZEing
             vertexBufferWaende.SetData<VertexPositionTexture>(VerticesWaende);
 
             indexBufferWaende = new IndexBuffer(game.GraphicsDevice, typeof(short), IndicesWaende.Length, BufferUsage.WriteOnly);
-            indexBufferWaende.SetData<short>(IndicesWaende);
-            
+            indexBufferWaende.SetData<short>(IndicesWaende);   
         }
+        /**
+         * Diese Methoden werden aufgerufen, um die verschiedenen Segmente des Labyrinths zu erzeugen
+         */
         private void Wand(int x, int z)
         {
             Decke(x, z);
@@ -195,6 +199,9 @@ namespace aMAZEing
             WandUnten(x, z);
         }
 
+        /**
+         * Diese Methoden erzeugen die eigentlichen Wände in der angegebenen Position und bestimmen und speichern ihre BoundingBoxes
+         */
         private void Decke(int x, int z)
         {
             int oldIndex = vertexListWaende.Count;
@@ -299,6 +306,7 @@ namespace aMAZEing
             indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 2));
         }
+
         public void Draw(ICamera camera)
         {
             wandEffect.Projection = camera.Projection;

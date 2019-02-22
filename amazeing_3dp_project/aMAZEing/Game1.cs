@@ -13,15 +13,8 @@ namespace aMAZEing
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         private Model spieler, arrow,hintArrow;
-        private Vector3 pos;
         private ICamera camera;
-
         private Spieler teekanne;
-
-        private float modelRotation = 0.0f;
-        private double modelRotationdeg;
-        private Matrix projectionMatrix;
-        private float aspectRatio;
         public MazeConstructor maze;
         private MazeFloor floor;
         private Mazemap map;
@@ -29,6 +22,11 @@ namespace aMAZEing
         private Hint hint;
         private SpriteFont font;
         private Timer timer;
+
+        private float modelRotation = 0.0f;
+        private Matrix projectionMatrix;
+        private float aspectRatio;
+        
 
         public ICamera Camera
         {
@@ -56,10 +54,7 @@ namespace aMAZEing
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            //g = new Grid(this, 5, 10, Color.Gray, Color.Red, Color.Blue);
-            pos = Vector3.Zero;
-            
+            // TODO: Add your initialization logic here       
             base.Initialize();
            
         }
@@ -116,11 +111,7 @@ namespace aMAZEing
             kompass.Update(gameTime);
             hint.Update(gameTime);
             //timer.Update(gameTime);
-            base.Update(gameTime);
-
-            
-
-            
+            base.Update(gameTime);    
         }
 
         /// <summary>
@@ -131,15 +122,18 @@ namespace aMAZEing
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            /**
+             * Philipp Spahr
+             * Hier wird ein Effekt auf das Model des Spielers angewandt. Deshalb sind die Effekte des Shaders sichtbar.
+             */
             Matrix[] transforms = new Matrix[spieler.Bones.Count];
             spieler.CopyAbsoluteBoneTransformsTo(transforms);
-
             foreach(ModelMesh mesh in spieler.Meshes)
             {
                 foreach(BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(modelRotation) * Matrix.CreateTranslation(pos);
+                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(modelRotation) * Matrix.CreateTranslation(Vector3.Zero);
                     effect.Projection = projectionMatrix;
                 }
                 mesh.Draw();

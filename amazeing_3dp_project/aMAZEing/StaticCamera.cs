@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Aus dem Unterricht
+     */
     public class StaticCamera : GameObject, ICamera
     {
         #region Private Members
@@ -82,7 +85,7 @@ namespace aMAZEing
                 MakeProjectionMatrix();
             }
         }
-        public Vector3 Target
+        public virtual Vector3 Target
         {
             get { return targetObject.Position; }
             set

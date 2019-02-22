@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Corinna Liller und Philipp Spahr
+     * Das Stand-In für den Spieler
+     */
     public class Spieler : GameObject
     {
         public Vector3 PrevPosition { get; set; }
@@ -48,10 +52,10 @@ namespace aMAZEing
             
             foreach (BoundingBox box in g.maze.BoundingBoxes)
             {
-                
-                    if (TeekanneBox.Intersects(box))
+                // Wenn der Spieler gegen eine Wand läuft, werden er und die Kamera wieder auf eine frühere Position gesetzt
+                if (TeekanneBox.Intersects(box))
                     {
-                        Console.WriteLine("Collision");
+                        //Console.WriteLine("Collision");
                         HitWall = true;
                         Position = PrevPosition;
                         g.Camera.Position = prevCameraPosition;
@@ -63,6 +67,7 @@ namespace aMAZEing
             
             if (!HitWall)
             {
+                // Die Position des Spielers wird regelmäßig gespeichert, damit er zurückgesetzt werden kann
                 if((Convert.ToInt32(gametime.TotalGameTime.TotalMilliseconds) % 100) == 0)
                 {
                     PrevPosition = Position;
@@ -87,10 +92,6 @@ namespace aMAZEing
                     Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
                 }
             }
-            
-            
-
-
         }
 
         public BoundingBox CreateBoundingBox()
