@@ -12,27 +12,23 @@ namespace aMAZEing
 {
     public class Spieler : GameObject
     {
+        Vector3 pos;
+        BoundingBox box;
         private Model model;
         private float speed = 5;
         public float Speed
         {
             get { return speed; }
-            set
-            {
-                ;
-            }
         }       
         
 
         public Spieler(Game game, Model model) : base(game)
         {
             this.model = model;
-            
+            box = new BoundingBox();
+
         }
-        public void LoadContent()
-        {
-            
-        }
+        
 
         public void Draw(GameTime gameTime, ICamera camera)
         {
@@ -62,7 +58,6 @@ namespace aMAZEing
             {
                 Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
-            //Forward = Position - ziel;
         }
     }
 }
