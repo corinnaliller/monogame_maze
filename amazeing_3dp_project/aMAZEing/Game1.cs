@@ -11,15 +11,14 @@ namespace aMAZEing
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        private Model spieler;
+        public SpriteBatch spriteBatch;
+        private Model spieler, arrow,hintArrow;
         private Vector3 pos;
-        double speedx, speedz;
         private Plane p;
         private ICamera camera;
         private Grid g;
         private Spieler teekanne;
-        string text, modelRotationstr;
+
         private float modelRotation = 0.0f;
         private double modelRotationdeg;
         private Matrix projectionMatrix;
@@ -27,14 +26,27 @@ namespace aMAZEing
         private MazeConstructor maze;
         private MazeFloor floor;
         private Mazemap map;
+        private Kompass kompass;
+        private Hint hint;
+        private SpriteFont font;
+        private Timer timer;
+
+        public Spieler Player
+        {
+            get { return teekanne; }
+        }
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+<<<<<<< HEAD
             camera = new ArcBallCamera(this, new Vector3(40, 15, 30));
             ((ArcBallCamera)camera).SetView(ViewMode.Front);
+=======
+            
+>>>>>>> 31df008b55584aa006688a38facc473638ce3eea
         }
 
         /// <summary>
@@ -60,15 +72,25 @@ namespace aMAZEing
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("Time");
             Texture2D gras = Content.Load<Texture2D>("Gras");
             Texture2D hecke = Content.Load<Texture2D>("Hecke");
             spieler = Content.Load<Model>("Teapot_red");
-            map = new Mazemap();
+            arrow = Content.Load<Model>("Arrow");
+            hintArrow = Content.Load<Model>("HintArrow");
+            map = new Mazemap(1);
             maze = new MazeConstructor(this,hecke,map, 7, 5);
             floor = new MazeFloor(this, gras, 5, map.MazeSize, map.MazeSize);
             p = new Plane(this, gras, 100, 1);
+            
+
             teekanne = new Spieler(this, spieler);
-            // TODO: use this.Content to load your game content here
+            teekanne.Position = new Vector3(2.5f, 2, 2.5f);
+            kompass = new Kompass(this, arrow, teekanne) { Scale = new Vector3(0.15f) };
+            hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.3f) };
+            
+            camera = new ArcBallCamera(this,teekanne);
+            timer = new Timer(this, font);
         }
 
         /// <summary>
@@ -91,25 +113,10 @@ namespace aMAZEing
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
-            modelRotationstr = Convert.ToString(modelRotation);
-            speedx = (Math.Sin(modelRotation)) * 30;
-            speedz = (Math.Cos(modelRotation)) * 30;
-            float speedxdouble, speedzdouble;
-            speedxdouble = (float)speedx;
-            speedzdouble = (float)speedz;
-
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Up))
-            {
-                pos += Vector3.Forward * speedzdouble;
-                pos += Vector3.Left * speedxdouble;
-            }
-            if (keyboardState.IsKeyDown(Keys.Down))
-            {
-                pos += Vector3.Backward * speedzdouble;
-                pos += Vector3.Right * speedxdouble;
-            }
-
+            teekanne.Update(gameTime);
+            kompass.Update(gameTime);
+            hint.Update(gameTime);
+            timer.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -136,11 +143,16 @@ namespace aMAZEing
             }
 
             // TODO: Add your drawing code here
-            g.Draw(camera);
-            teekanne.Draw(gameTime, camera);
+            
+            //g.Draw(camera);
+            
             //p.Draw(camera);
             maze.Draw(camera);
             floor.Draw(camera);
+            teekanne.Draw(gameTime, camera);
+            kompass.Draw(gameTime, camera);
+            hint.Draw(gameTime, camera);
+            //timer.Draw(gameTime);
             base.Draw(gameTime);
         }
     }

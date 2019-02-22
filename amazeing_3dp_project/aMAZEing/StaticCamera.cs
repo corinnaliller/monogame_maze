@@ -15,6 +15,8 @@ namespace aMAZEing
         private float farPlane = 100;
         private float aspectRatio = 1.6f;
         private float fieldOfView = MathHelper.PiOver4;
+        private GameObject targetObject;
+        private Vector3 offset = new Vector3(1, -1, 1);
         #endregion
 
         #region Public Properties
@@ -80,11 +82,23 @@ namespace aMAZEing
                 MakeProjectionMatrix();
             }
         }
-
+        public Vector3 Target
+        {
+            get { return targetObject.Position; }
+            set
+            {
+                LookAt(value);
+            }
+        }
         #endregion
 
         #region Public Constructors
         public StaticCamera(Game game) : this(game, Vector3.Zero) { }
+
+        public StaticCamera(Game game, GameObject target) : this(game, target.Position - new Vector3(1, -1, 1))
+        {
+            targetObject = target;
+        }
 
         public StaticCamera(Game game, Vector3 position) : this(game, position, Vector3.Forward) { }
 
@@ -120,12 +134,18 @@ namespace aMAZEing
 
         #region Public Methods
 
+
         public override void CreateLocalToWorldMatrix()
         {
             base.CreateLocalToWorldMatrix();
             MakeViewMatrix();
         }
-
+        public override void LookAt(Vector3 target)
+        {
+            //Distance = (target - Position).Length();
+            base.LookAt(target);
+        }
         #endregion
+
     }
 }
