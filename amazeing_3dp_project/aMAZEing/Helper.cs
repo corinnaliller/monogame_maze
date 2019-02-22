@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace aMAZEing
 {
+    /**
+     * Aus dem Unterricht
+     */
     public class Helper
     {
         public static Vector3 QuaternionToEuler(Quaternion rotation)

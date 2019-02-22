@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace aMAZEing
 {
+    /**
+     * Wichtige Enums - kopiert
+     */
     public enum Space
     {
         Self,
@@ -19,6 +22,10 @@ namespace aMAZEing
         Top,
         Bottom
     }
+    /**
+     * Corinna Liller
+     * Die Spielerkamera - angepasst von ArcBallCamera
+     */
     public class ArcBallCamera : StaticCamera
     {
         private float distance;
@@ -29,7 +36,6 @@ namespace aMAZEing
         private Keys upKey = Keys.W;
         private Keys downKey = Keys.S;
         private Spieler target;
-        private Vector3 PrevPosition { get; set; }
         #region Public Properties
 
         public float Distance
@@ -75,12 +81,6 @@ namespace aMAZEing
         public override void Update(GameTime gameTime)
         {
             Target = target.Position;
-            //Position = target.Position - new Vector3(2, -2, 2);
-            //if(target.HitWall)
-            //{
-            //    Position = PrevPosition;
-            //}
-
             KeyboardState currentKeyBoardState = Keyboard.GetState();
 
 
@@ -125,8 +125,6 @@ namespace aMAZEing
                 }
             }
            
-
-            PrevPosition = Position;
             base.Update(gameTime);
         }
 

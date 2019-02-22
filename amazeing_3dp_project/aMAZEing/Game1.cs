@@ -14,9 +14,8 @@ namespace aMAZEing
         public SpriteBatch spriteBatch;
         private Model spieler, arrow,hintArrow;
         private Vector3 pos;
-        private Plane p;
         private ICamera camera;
-        private Grid g;
+
         private Spieler teekanne;
 
         private float modelRotation = 0.0f;
@@ -79,13 +78,12 @@ namespace aMAZEing
             spieler = Content.Load<Model>("Teapot_red");
             arrow = Content.Load<Model>("Arrow");
             hintArrow = Content.Load<Model>("HintArrow");
-            map = new Mazemap(1);
-            maze = new MazeConstructor(this,hecke,map, 7, 5);
+            map = new Mazemap(2);
+            maze = new MazeConstructor(this,hecke,map, 8, 5);
             floor = new MazeFloor(this, gras, 5, map.MazeSize, map.MazeSize);
-            p = new Plane(this, gras, 100, 1);
 
 
-            teekanne = new Spieler(this, spieler) { Position = new Vector3(map.AnfangsFeld.X + 2.5f, 4, map.AnfangsFeld.Y + 2.5f) };
+            teekanne = new Spieler(this, spieler) { Position = new Vector3(map.AnfangsFeld.X + 2.5f, 4, map.AnfangsFeld.Y*5 + 2.5f) };
             teekanne.Scale = new Vector3(0.015f);
             kompass = new Kompass(this, arrow, teekanne) { Scale = new Vector3(0.15f) };
             hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.2f) };
@@ -148,10 +146,6 @@ namespace aMAZEing
             }
 
             // TODO: Add your drawing code here
-            
-            //g.Draw(camera);
-            
-            //p.Draw(camera);
             maze.Draw(camera);
             floor.Draw(camera);
             teekanne.Draw(gameTime, camera);

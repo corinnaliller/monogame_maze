@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace aMAZEing
 {
+    /**
+     * Corinna Liller
+     * Diese Klasse hat einen 3D-Pfeil, der immer in direkter Linie auf den Ausgang zeigt.
+     */
     public class Hint : GameObject
     {
         private Model model;

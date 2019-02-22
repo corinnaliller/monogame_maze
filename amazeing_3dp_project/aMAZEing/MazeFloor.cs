@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Corinna Liller
+     * Kreiert den Boden des Labyrinths
+     */
     class MazeFloor
     {
         private List<VertexPositionTexture> vertexListBoden;

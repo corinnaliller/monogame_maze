@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Corinna Liller
+     * Diese Klasse sollte der Zeiterfassung während des Spiels dienen.
+     * Leider zerschließt die Draw-Methode die Darstellung aller anderen Objekte.
+     * Deshalb auskommentiert in der Game-Klasse
+     */
     public class Timer
     {
         private Game game;

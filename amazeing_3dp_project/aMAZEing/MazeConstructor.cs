@@ -8,10 +8,19 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Corinna Liller
+     * Eine Enum, die bei der Konstruktion eines Labyrinths hilft.
+     */
     public enum MazePart
     {
         GangObenUnten, GangRechtsLinks,TKreuzungRechts,TKreuzungLinks, TKreuzungOben, TKreuzungUnten, SackgasseOben, SackgasseUnten, SackgasseRechts, SackgasseLinks, KurveUntenRechts, KurveUntenLinks, KurveObenRechts, KurveObenLinks, Kreuzung, Wand
     }
+
+    /**
+     * Corinna Liller
+     * Diese Klasse legt mithilfe der obigen Enum und einer Mazemap
+     */
     public class MazeConstructor
     {
         private List<VertexPositionTexture> vertexListWaende;

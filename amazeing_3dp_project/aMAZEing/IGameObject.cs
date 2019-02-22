@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Aus dem Unterricht
+     */
     public interface IGameObject : IHierarchy, ITransform
     {
         // The name of the object

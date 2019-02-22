@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Aus dem Unterricht
+     */
     public interface IHierarchy
     {
         // The number of children

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
+    /**
+     * Aus dem Unterricht
+     */
     public interface ICamera : ITransform
     {
         Matrix View { get; }

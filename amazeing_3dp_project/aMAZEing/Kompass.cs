@@ -8,6 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace aMAZEing
 {
+    /**
+     * Corinna Liller
+     * Diese Klasse hat einen Pfeil, der immer in Richtung Vector3.Forward ("Norden") zeigt.
+     * Er dient der Orientierung im Labyrinth.
+     */
     public class Kompass : GameObject
     {
         private Model model;

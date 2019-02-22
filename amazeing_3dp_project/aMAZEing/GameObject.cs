@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace aMAZEing
 {
+    /**
+     * Aus dem Unterrricht
+     */
     public class GameObject : GameComponent, IGameObject
     {
         # region Private Members
