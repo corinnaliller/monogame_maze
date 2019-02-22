@@ -13,9 +13,12 @@ namespace aMAZEing
     public class Spieler : GameObject
     {
         public Vector3 PrevPosition { get; set; }
+        private Vector3 prevCameraPosition;
         private Model model;
-        public BoundingBox teekanneBox;
+        public BoundingBox TeekanneBox;
+        public List<BoundingBox> BoundingBoxes;
         private float speed = 5;
+        public bool HitWall { get; set; }
         public float Speed
         {
             get { return speed; }
@@ -25,14 +28,13 @@ namespace aMAZEing
         public Spieler(Game game, Model model) : base(game)
         {
             this.model = model;
-            teekanneBox = CreateBoundingBox();
+            TeekanneBox = CreateBoundingBox();
 
         }
         
 
         public void Draw(GameTime gameTime, ICamera camera)
         {
-            //Debug.GraphicsManager.DrawLine(teekanneBox, Color.Purple);
             model.Draw(LocalToWorld, camera.View, camera.Projection);
         }
 
@@ -40,23 +42,33 @@ namespace aMAZEing
         public override void Update(GameTime gametime)
         {
             KeyboardState keys = Keyboard.GetState();
-            teekanneBox = CreateBoundingBox();
+            TeekanneBox = CreateBoundingBox();
             Game1 g = Game as Game1;
-            bool collision = false;
+            HitWall = false;
             
             foreach (BoundingBox box in g.maze.BoundingBoxes)
             {
                 
-                if (teekanneBox.Intersects(box))
-                {
-                    //Console.WriteLine("Collision");
-                    collision = true;
-                    Position = PrevPosition;
-                }
+                    if (TeekanneBox.Intersects(box))
+                    {
+                        Console.WriteLine("Collision");
+                        HitWall = true;
+                        Position = PrevPosition;
+                        g.Camera.Position = prevCameraPosition;
+                    }
+                
+                
 
             }
-           // if (!collision)
-            //{
+            
+            if (!HitWall)
+            {
+                if((Convert.ToInt32(gametime.TotalGameTime.TotalMilliseconds) % 100) == 0)
+                {
+                    PrevPosition = Position;
+                    prevCameraPosition = g.Camera.Position;
+                }
+
                 if (keys.IsKeyDown(Keys.Down))
                 {
                     Position = Position + (Forward * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
@@ -74,18 +86,20 @@ namespace aMAZEing
                 {
                     Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
                 }
-            //}
-            PrevPosition = Position;
+            }
+            
+            
 
 
         }
 
         public BoundingBox CreateBoundingBox()
         {
-            teekanneBox = new BoundingBox(new Vector3(Position.X - 1, Position.Y, Position.Z - 1), new Vector3(Position.X + 1, Position.Y + 2, Position.Z + 1));
-            return teekanneBox;
+            BoundingBox box = new BoundingBox(Position - new Vector3(0.5f), Position + new Vector3(0.5f));
+            return box;
         }
-
         
+
+
     }
 }

@@ -210,7 +210,7 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step + step), new Vector2(1,1)));
 
             List<Vector3> templist = new List<Vector3>();
-            for (int i = 0; i < vertexListWaende.Count; i++)
+            for (int i = oldIndex; i < vertexListWaende.Count; i++)
             {
                 templist.Add(vertexListWaende[i].Position);
             }
@@ -232,7 +232,7 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
             List<Vector3> templist = new List<Vector3>();
-            for (int i = 0; i < vertexListWaende.Count; i++)
+            for (int i = oldIndex; i < vertexListWaende.Count; i++)
             {
                 templist.Add(vertexListWaende[i].Position);
             }
@@ -254,11 +254,12 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
             List<Vector3> templist = new List<Vector3>();
-            for (int i = 0; i < vertexListWaende.Count; i++)
+            for (int i = oldIndex; i < vertexListWaende.Count; i++)
             {
                 templist.Add(vertexListWaende[i].Position);
             }
             BoundingBoxes.Add(BoundingBox.CreateFromPoints(templist));
+           //Console.WriteLine(BoundingBox.CreateFromPoints(templist).Min + " - " + BoundingBox.CreateFromPoints(templist).Max);
 
             indexListWaende.Add(Convert.ToInt16(oldIndex));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
@@ -276,7 +277,7 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(1, 1)));
 
             List<Vector3> templist = new List<Vector3>();
-            for (int i = 0; i < vertexListWaende.Count; i++)
+            for (int i = oldIndex; i < vertexListWaende.Count; i++)
             {
                 templist.Add(vertexListWaende[i].Position);
             }

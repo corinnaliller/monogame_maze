@@ -20,7 +20,7 @@ namespace aMAZEing
         }
         public override void Update(GameTime gameTime)
         {
-            Position = spieler.Position - new Vector3(0, 2, 0);
+            Position = new Vector3(spieler.Position.X, 1, spieler.Position.Z);
         }
         public void Draw(GameTime gameTime, ICamera camera)
         {

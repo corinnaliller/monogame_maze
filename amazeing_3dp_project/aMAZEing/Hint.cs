@@ -18,7 +18,7 @@ namespace aMAZEing
             this.model = model;
             this.spieler = spieler;
             this.ziel = new Vector3(ziel.X*5, 1, (ziel.Y+1)*5+2.5f);
-            Position = spieler.Position - new Vector3(0, 1, 0);
+            Position = new Vector3(spieler.Position.X,1,spieler.Position.Z);
             Forward = this.ziel - Position;
         }
         public override void Update(GameTime gameTime)

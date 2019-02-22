@@ -28,7 +28,8 @@ namespace aMAZEing
         private Keys rightKey = Keys.D;
         private Keys upKey = Keys.W;
         private Keys downKey = Keys.S;
-        private GameObject target;
+        private Spieler target;
+        private Vector3 PrevPosition { get; set; }
         #region Public Properties
 
         public float Distance
@@ -55,7 +56,7 @@ namespace aMAZEing
 
         #endregion
 
-        public ArcBallCamera(Game game, GameObject target) : this(game,target.Position - new Vector3(0,-2,3),target)
+        public ArcBallCamera(Game game, Spieler target) : this(game,target.Position - new Vector3(0,-2,3),target)
         {
         }
         public ArcBallCamera(Game game, Vector3 position) : base(game,position)
@@ -63,7 +64,7 @@ namespace aMAZEing
             Target = Vector3.Zero;
         }
 
-        public ArcBallCamera(Game game, Vector3 position, GameObject target) :
+        public ArcBallCamera(Game game, Vector3 position, Spieler target) :
             base(game, position)
         {
             this.target = target;
@@ -75,6 +76,10 @@ namespace aMAZEing
         {
             Target = target.Position;
             //Position = target.Position - new Vector3(2, -2, 2);
+            //if(target.HitWall)
+            //{
+            //    Position = PrevPosition;
+            //}
 
             KeyboardState currentKeyBoardState = Keyboard.GetState();
 
@@ -100,23 +105,28 @@ namespace aMAZEing
             {
                 RotateAround(Position + (Forward * distance), Right, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
             }
-            if (currentKeyBoardState.IsKeyDown(Keys.Down))
+            if (!target.HitWall)
             {
-                Position = Position + (target.Forward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                if (currentKeyBoardState.IsKeyDown(Keys.Down))
+                {
+                    Position = Position + (target.Forward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                }
+                if (currentKeyBoardState.IsKeyDown(Keys.Up))
+                {
+                    Position = Position + (target.Backward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                }
+                if (currentKeyBoardState.IsKeyDown(Keys.Left))
+                {
+                    Position = Position + (target.Right * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                }
+                if (currentKeyBoardState.IsKeyDown(Keys.Right))
+                {
+                    Position = Position + (target.Left * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
+                }
             }
-            if (currentKeyBoardState.IsKeyDown(Keys.Up))
-            {
-                Position = Position + (target.Backward * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
-            }
-            if (currentKeyBoardState.IsKeyDown(Keys.Left))
-            {
-                Position = Position + (target.Right * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
-            }
-            if (currentKeyBoardState.IsKeyDown(Keys.Right))
-            {
-                Position = Position + (target.Left * (float)gameTime.ElapsedGameTime.TotalSeconds * speed);
-            }
+           
 
+            PrevPosition = Position;
             base.Update(gameTime);
         }
 
@@ -124,7 +134,7 @@ namespace aMAZEing
 
         public override void LookAt(Vector3 target)
         {
-            Distance = (target - Position).Length();
+            //Distance = (target - Position).Length();
             base.LookAt(target);
         }
 

@@ -75,7 +75,7 @@ namespace aMAZEing
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Time");
             Texture2D gras = Content.Load<Texture2D>("Gras");
-            Texture2D hecke = Content.Load<Texture2D>("Hecke");
+            Texture2D hecke = Content.Load<Texture2D>("Hecke2");
             spieler = Content.Load<Model>("Teapot_red");
             arrow = Content.Load<Model>("Arrow");
             hintArrow = Content.Load<Model>("HintArrow");
@@ -83,9 +83,10 @@ namespace aMAZEing
             maze = new MazeConstructor(this,hecke,map, 7, 5);
             floor = new MazeFloor(this, gras, 5, map.MazeSize, map.MazeSize);
             p = new Plane(this, gras, 100, 1);
-            
+
 
             teekanne = new Spieler(this, spieler) { Position = new Vector3(map.AnfangsFeld.X + 2.5f, 4, map.AnfangsFeld.Y + 2.5f) };
+            teekanne.Scale = new Vector3(0.015f);
             kompass = new Kompass(this, arrow, teekanne) { Scale = new Vector3(0.15f) };
             hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.2f) };
             
@@ -156,7 +157,7 @@ namespace aMAZEing
             teekanne.Draw(gameTime, camera);
             kompass.Draw(gameTime, camera);
             hint.Draw(gameTime, camera);
-            timer.Draw(gameTime);
+            //timer.Draw(gameTime);
             base.Draw(gameTime);
         }
     }
