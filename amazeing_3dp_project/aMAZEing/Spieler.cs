@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace aMAZEing
 {
-    class Spieler : GameObject
+    public class Spieler : GameObject
     {
         private Vector3 ziel;
         private Model model;

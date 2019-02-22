@@ -82,13 +82,13 @@ namespace aMAZEing
             if (currentKeyBoardState.IsKeyDown(leftKey))
             {
                 RotateAround(Position + (Forward * distance), Vector3.Up, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-                target.Rotate(0, ((float)gameTime.ElapsedGameTime.TotalSeconds),0);
+                target.Rotate(0, (float)gameTime.ElapsedGameTime.TotalSeconds,0);
             }
 
             if (currentKeyBoardState.IsKeyDown(rightKey))
             {
                 RotateAround(Position + (Forward * distance), Vector3.Up, -rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
-                target.Rotate(0, -((float)gameTime.ElapsedGameTime.TotalSeconds), 0);
+                target.Rotate(0, -(float)gameTime.ElapsedGameTime.TotalSeconds, 0);
             }
 
             if (currentKeyBoardState.IsKeyDown(upKey))

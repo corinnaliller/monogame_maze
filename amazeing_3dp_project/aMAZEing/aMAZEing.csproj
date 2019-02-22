@@ -46,10 +46,12 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Hint.cs" />
     <Compile Include="ICamera.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="IHierarchy.cs" />
     <Compile Include="ITransform.cs" />
+    <Compile Include="Kompass.cs" />
     <Compile Include="MazeConstructor.cs" />
     <Compile Include="MazeFloor.cs" />
     <Compile Include="Mazemap.cs" />
