@@ -13,8 +13,8 @@ namespace aMAZEing
     public class Spieler : GameObject
     {
         Vector3 pos;
-        BoundingBox box;
         private Model model;
+        private BoundingBox teekanneBox;
         private float speed = 5;
         public float Speed
         {
@@ -22,10 +22,10 @@ namespace aMAZEing
         }       
         
 
-        public Spieler(Game game, Model model) : base(game)
+        public Spieler(Game game, Model model, BoundingBox teeKanneBox) : base(game)
         {
             this.model = model;
-            box = new BoundingBox();
+            teekanneBox = new BoundingBox();
 
         }
         
@@ -58,6 +58,11 @@ namespace aMAZEing
             {
                 Position = Position + (Left * (float)gametime.ElapsedGameTime.TotalSeconds * Speed);
             }
+        }
+
+        public void CreateBoundingBox()
+        {
+            teekanneBox = new BoundingBox()
         }
     }
 }

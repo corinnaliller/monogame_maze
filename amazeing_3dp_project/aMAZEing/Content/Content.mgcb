@@ -94,3 +94,10 @@
 /processorParam:TextureFormat=Compressed
 /build:HintArrow.FBX
 
+#begin Time.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Time.spritefont
+

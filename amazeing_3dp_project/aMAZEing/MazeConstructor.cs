@@ -25,6 +25,11 @@ namespace aMAZEing
         private Game game;
         private Mazemap map;
 
+        public List<BoundingBox> BoundingBoxes
+        {
+            get;
+        }
+
         public VertexPositionTexture[] VerticesWaende
         {
             get
@@ -46,6 +51,7 @@ namespace aMAZEing
         {
             vertexListWaende = new List<VertexPositionTexture>();
             indexListWaende = new List<short>();
+            BoundingBoxes = new List<BoundingBox>();
             this.game = game;
             this.height = height;
             this.step = step;
@@ -213,6 +219,13 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, 0, z * step + step), new Vector2(1,0)));
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x*step, height, z * step + step), new Vector2(1,1)));
 
+            List<Vector3> templist = new List<Vector3>();
+            for (int i = 0; i < vertexListWaende.Count; i++)
+            {
+                templist.Add(vertexListWaende[i].Position);
+            }
+            BoundingBoxes.Add(BoundingBox.CreateFromPoints(templist));
+
             indexListWaende.Add(Convert.ToInt16(oldIndex));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
@@ -227,6 +240,13 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(0, 1)));
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
+
+            List<Vector3> templist = new List<Vector3>();
+            for (int i = 0; i < vertexListWaende.Count; i++)
+            {
+                templist.Add(vertexListWaende[i].Position);
+            }
+            BoundingBoxes.Add(BoundingBox.CreateFromPoints(templist));
 
             indexListWaende.Add(Convert.ToInt16(oldIndex));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
@@ -243,6 +263,13 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step + step), new Vector2(1, 1)));
 
+            List<Vector3> templist = new List<Vector3>();
+            for (int i = 0; i < vertexListWaende.Count; i++)
+            {
+                templist.Add(vertexListWaende[i].Position);
+            }
+            BoundingBoxes.Add(BoundingBox.CreateFromPoints(templist));
+
             indexListWaende.Add(Convert.ToInt16(oldIndex));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 3));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
@@ -257,6 +284,13 @@ namespace aMAZEing
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step, height, z * step), new Vector2(0, 1)));
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 0)));
             vertexListWaende.Add(new VertexPositionTexture(new Vector3(x * step + step, height, z * step), new Vector2(1, 1)));
+
+            List<Vector3> templist = new List<Vector3>();
+            for (int i = 0; i < vertexListWaende.Count; i++)
+            {
+                templist.Add(vertexListWaende[i].Position);
+            }
+            BoundingBoxes.Add(BoundingBox.CreateFromPoints(templist));
 
             indexListWaende.Add(Convert.ToInt16(oldIndex));
             indexListWaende.Add(Convert.ToInt16(oldIndex + 1));
