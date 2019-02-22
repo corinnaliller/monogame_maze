@@ -67,8 +67,8 @@ namespace aMAZEing
             int oldIndex = vertexListBoden.Count;
             vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step), new Vector2(0, 0)));
             vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step, 0, z * step+step), new Vector2(0, 1)));
-            vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 0)));
-            vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 1)));
+            vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step + step), new Vector2(1, 1)));
+            vertexListBoden.Add(new VertexPositionTexture(new Vector3(x * step + step, 0, z * step), new Vector2(1, 0)));
 
             indexListBoden.Add(Convert.ToInt16(oldIndex));
             indexListBoden.Add(Convert.ToInt16(oldIndex + 2));

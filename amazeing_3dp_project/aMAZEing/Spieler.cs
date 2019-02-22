@@ -12,7 +12,6 @@ namespace aMAZEing
 {
     public class Spieler : GameObject
     {
-        private Vector3 ziel;
         private Model model;
         private float speed = 5;
         public float Speed
@@ -25,10 +24,9 @@ namespace aMAZEing
         }       
         
 
-        public Spieler(Game game, Model model, Vector2 ziel) : base(game)
+        public Spieler(Game game, Model model) : base(game)
         {
             this.model = model;
-            this.ziel = new Vector3(ziel.X * 5, 3, ziel.Y * 5);
             
         }
         public void LoadContent()

@@ -77,18 +77,13 @@ namespace aMAZEing
             p = new Plane(this, gras, 100, 1);
             
 
-            teekanne = new Spieler(this, spieler, map.ZielFeld);
+            teekanne = new Spieler(this, spieler);
             teekanne.Position = new Vector3(2.5f, 2, 2.5f);
             kompass = new Kompass(this, arrow, teekanne) { Scale = new Vector3(0.15f) };
             hint = new Hint(this, hintArrow, teekanne, map.ZielFeld) { Scale = new Vector3(0.3f) };
             
             camera = new ArcBallCamera(this,teekanne);
-            //camera = new TrackingCamera(this);
-            //camera.Position = new Vector3(0, 5, 2);
-            //((TrackingCamera)camera).Track(teekanne);
-            //((ArcBallCamera)camera).SetView(ViewMode.Front);
-            //((ArcBallCamera)camera).Target = teekanne.Position;
-            // TODO: use this.Content to load your game content here
+
         }
 
         /// <summary>
@@ -110,7 +105,6 @@ namespace aMAZEing
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             ((ArcBallCamera)camera).Update(gameTime);
-            //((TrackingCamera)camera).Update(gameTime);
             // TODO: Add your update logic here
 
             teekanne.Update(gameTime);
